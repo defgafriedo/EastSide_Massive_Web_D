@@ -1,0 +1,22 @@
+input {
+    cursor: pointer;
+}
+
+img {
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+}
+
+.card {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.card-body {
+    color: #fff;
+}
+
+.table-payment td {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.0);
+}
