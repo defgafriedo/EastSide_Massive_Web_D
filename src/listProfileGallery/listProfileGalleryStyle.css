@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+
+}
+
+body {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url('../img/background1.png');
+}
+
+.card{
+    width: 18rem; 
+    background-color: #434343;
+}
+
+.card-img{
+    object-fit: cover;
+}
+
+.card-title{
+    color: #fff;
+}
+
+.card-text{
+    color: #fff;
+    margin-top: 20px;
+}
