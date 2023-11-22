@@ -9,7 +9,7 @@ const listProfileGallery = () => {
                 <Row>
                     <Col className='mx-4 my-4'>
                         <Card className='card'>
-                            <Card.Img variant="top" src={drawing1} />
+                            <Card.Img variant="top" src={drawing1}/>
                             <Card.Body>
                                 <Card.Title>Card Title</Card.Title>
                                 <Card.Text>
