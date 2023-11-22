@@ -1,8 +1,10 @@
 import { Card, Row, Col, Container } from 'react-bootstrap'
 import drawing1 from '../img/listProfileGallery/Drawing1.png'
 import './listProfileGalleryStyle.css'
+// import drawing2 from '../img/background1.png';
 
 const listProfileGallery = () => {
+    // document.body.style.backgroundImage = linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('${drawing2}');
     return (
         <>
             <Container className='my-5 d-flex justify-content-center align-items-center'>
