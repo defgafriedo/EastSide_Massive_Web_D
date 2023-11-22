@@ -14,7 +14,7 @@ const payment = () => {
         <Col md={8} className='my-4'>
           <Card className='card'>
             <Card.Body className='card-body'>
-              <div >
+              <div className="w-auto">
                 <h5>Payment</h5>
                 <div className='my-3'>
                   <input type="radio" id="Dana" name="paymentMethod" value="Dana" />
@@ -67,14 +67,11 @@ const payment = () => {
 
                 </tbody>
               </Table>
-
               <div className="d-grid gap-2">
                 <Button variant="primary">
                   Check Out
                 </Button>
               </div>
-
-
             </Card.Body>
           </Card>
         </Col>

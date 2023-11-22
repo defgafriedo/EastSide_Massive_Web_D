@@ -12,14 +12,14 @@ const orderList = () => {
             <Col className="bg-white mx-5">
                 <Row className="bg-black">
                     <Col className="bg-black px-0 col-md-3" >
-                        <img src={Gambar} className="img-fluid"></img>
+                        <img src={Gambar} className="img-fluid m-4 w-75 h-75"></img>
                     </Col>
-                    <Col className="col-md-9">
+                    <Col className="col-md-9 h-100 position">
                         <Row>
                             <h1>una</h1>
-                            <p>asdasd asqweqwhk Afnlasjlqjwelqjladkaljdl</p>
+                            <p>asdasd asqweqwhk Afnlasjlqjwelqjladkaljdlk Afnlasjlqjwelqjladkaljd laljdlk Afnlasjlqjwelqjladkaljd</p>
                         </Row>
-                        <Row className="mx-3">
+                        <Row className="mx-3 mt-5">
                             <Col className="d-grid gap-2 my-1">
                                 <Button variant="secondary">
                                     Detail

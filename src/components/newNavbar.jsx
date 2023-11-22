@@ -7,11 +7,6 @@ import './newNavbarStyle.css';
 function NavBar() {
   return (
     <>
-      {/* <Stack direction="horizontal" gap={3}>
-      <div className="p-2">First item</div>
-      <div className="p-2">Second item</div>
-      <div className="p-2">Third item</div>
-    </Stack> */}
       <Navbar collapseOnSelect expand="lg" style={{ backgroundColor: 'rgba(11, 11, 11, 0.5)' }}>
         <Container fluid className='mx-4'>
         <Navbar.Brand href=''><img src={logo} alt="Logo" /></Navbar.Brand>
@@ -29,9 +24,9 @@ function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
 
           <Nav className="ms-auto">
-            <Nav.Link href="#dashboard" className='me-5' style={{ color: '#fff' }}>Dashboard</Nav.Link>
-            <Nav.Link href="#about" className='me-5' style={{ color: '#fff' }}>About</Nav.Link>
-            <Nav.Link href="#listArtist" className='me-5' style={{ color: '#fff' }}>List Artist</Nav.Link>
+            <Nav.Link href="/order-list" className='me-5' style={{ color: '#fff' }}>Dashboard</Nav.Link>
+            <Nav.Link href="/list-profile-gallery" className='me-5' style={{ color: '#fff' }}>About</Nav.Link>
+            <Nav.Link href="/payment" className='me-5' style={{ color: '#fff' }}>List Artist</Nav.Link>
             <Button variant="primary">Log In/Sign Up</Button>
           </Nav>
         </Navbar.Collapse>
