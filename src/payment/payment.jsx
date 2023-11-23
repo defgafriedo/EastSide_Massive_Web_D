@@ -6,8 +6,10 @@ import ShopeePay from '../img/paymentLogo/ShopeePay.png';
 import BRI from '../img/paymentLogo/bankBRI.png';
 import BCA from '../img/paymentLogo/BankBCA.png';
 import './paymentStyle.css';
+import Background3 from '../img/background3.png'
 
 const Payment = () => {
+  document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('${Background3}')`;
   return (
     <Container>
       <Row>

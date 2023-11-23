@@ -1,14 +1,3 @@
-* {
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-
-}
-
-body {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-        url('../img/background3.png');
-}
-
 input {
     cursor: pointer;
 }
@@ -19,13 +8,13 @@ img {
     cursor: pointer;
 }
 
-.payment{
+.payment {
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     border-radius: 10px;
 }
 
-.payment td{
+.payment td {
     background-color: rgba(0, 0, 0, 0);
     color: #fff;
 }

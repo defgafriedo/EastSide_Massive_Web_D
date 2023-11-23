@@ -5,6 +5,7 @@ import ListProfileGallery from './listProfileGallery/listProfileGallery'
 import OrderList from './orderList/orderList'
 import Payment from './payment/payment'
 import OrderDetail from './orderDetail/orderDetail'
+import DetailShowcase from './detailShowcase/detailShowcase'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/order-list" element={<OrderList/>} />
           <Route path="/payment" element={<Payment/>} />
           <Route path="/order-detail" element ={<OrderDetail/>}/>
+          <Route path="/detail-showcase" element ={<DetailShowcase/>}/>
         </Routes>
       </div>
     </Router>

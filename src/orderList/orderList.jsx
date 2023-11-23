@@ -1,8 +1,12 @@
 import { Button, Col, Container, Row } from "react-bootstrap"
 import './orderListStyle.css'
 import Gambar from '../img/Drawing2.png'
+import Background3 from '../img/background3.png'
+
 
 const orderList = () => {
+    document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('${Background3}')`;
+
     return (
         <Container fluid>
             <div className="mx-5 my-4 d-flex" style={{ backgroundColor: 'rgba(72, 90, 255, 0.65)', color:'#fff', borderRadius:'10px'}}>
