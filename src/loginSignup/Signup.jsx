@@ -136,18 +136,13 @@ function SignUpForm(props) {
             }}
           >
             <a href="#">Lupa password?</a>
+            <a href="#" id="signIn" onClick={handleClick}>
+              Sudah&nbsp;punya&nbsp;akun
+            </a>
           </div>
         </div>
 
         <button>Sign Up</button>
-        <a
-          href="#"
-          id="signIn"
-          onClick={handleClick}
-          style={{ marginRight: "230px" }}
-        >
-          Sudah punya akun
-        </a>
       </form>
     </div>
   );
