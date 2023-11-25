@@ -8,12 +8,6 @@
 
 body {
   background-image: url("../img/loginSignup/background-login.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 h1 {
@@ -54,11 +48,10 @@ button {
   color: #ffffff;
   font-size: 12px;
   padding: 12px 45px;
-  margin-right: 200px;
   font-family: "Poppins";
   transition: background-color 0.3s ease;
-  border: none; /* Menghilangkan border */
-  outline: none; /* Menghilangkan efek outline saat di-focus */
+  border: none;
+  outline: none;
 }
 
 button:hover {
