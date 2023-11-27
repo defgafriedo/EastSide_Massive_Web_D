@@ -19,7 +19,16 @@ export default function LS() {
     <div className="App">
       <div
         className={containerClass}
-        style={{ position: "relative", width: "930px", height: "635px" }}
+        style={{
+          position: "relative",
+          width: "62%",
+          height: "635px",
+          minWidth: "500px",
+          "@media screen and (max-width: 768px)": {
+            width: "100%",
+            height: "auto",
+          },
+        }}
       >
         <SignUpForm onSignInClick={handleSignInClick} />
         <SignInForm onSignInClick={handleSignInClick} />
