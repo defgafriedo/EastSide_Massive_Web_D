@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import SignInForm from "./Login";
 import SignUpForm from "./Signup";
 import "./Login-Signup-Style.css";
-
 export default function LS() {
   const [type, setType] = useState("signIn");
 
@@ -18,7 +17,10 @@ export default function LS() {
 
   return (
     <div className="App">
-      <div className={containerClass} id="container">
+      <div
+        className={containerClass}
+        style={{ position: "relative", width: "930px", height: "635px" }}
+      >
         <SignUpForm onSignInClick={handleSignInClick} />
         <SignInForm onSignInClick={handleSignInClick} />
         <div className="overlay-container">
