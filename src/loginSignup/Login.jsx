@@ -55,6 +55,15 @@ function SignInForm(props) {
             name="email"
             value={state.email}
             onChange={handleChange}
+            style={{
+              backgroundColor: "#ffffff",
+              border: "none",
+              padding: "12px 15px",
+              borderRadius: "8px",
+              width: "103%",
+              border: "1px solid rgba(0, 0, 0, 0.22)",
+              boxShadow: "0px 2px 3px 1px rgba(0, 0, 0, 0.22)",
+            }}
           />
 
           <p
@@ -73,11 +82,21 @@ function SignInForm(props) {
             name="password"
             value={state.password}
             onChange={handleChange}
+            style={{
+              backgroundColor: "#ffffff",
+              border: "none",
+              padding: "12px 15px",
+              borderRadius: "8px",
+              width: "103%",
+              border: "1px solid rgba(0, 0, 0, 0.22)",
+              boxShadow: "0px 2px 3px 1px rgba(0, 0, 0, 0.22)",
+            }}
           />
         </div>
+
         <div
           style={{
-            width: "100%",
+            width: "90%",
             display: "flex",
             justifyContent: "space-between",
             padding: "10px",
@@ -95,11 +114,15 @@ function SignInForm(props) {
               style={{
                 display: "flex",
                 alignItems: "center",
-                marginLeft: "10px",
               }}
             >
               <input type="checkbox" id="formBasicCheckbox" />
-              <p style={{ margin: "10px", fontSize: "10px" }}>
+              <p
+                style={{
+                  margin: "5px",
+                  fontSize: "10px",
+                }}
+              >
                 Ingat&nbsp;saya
               </p>
             </div>
@@ -110,6 +133,7 @@ function SignInForm(props) {
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-end",
+              marginTop: "5px",
             }}
           >
             <a href="#">Lupa password?</a>
