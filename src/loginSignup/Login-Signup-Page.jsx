@@ -21,11 +21,11 @@ export default function LS() {
         className={containerClass}
         style={{
           position: "relative",
-          width: "62%",
+          width: "80%",
           height: "635px",
           minWidth: "500px",
           "@media screen and (max-width: 768px)": {
-            width: "100%",
+            width: "1200px",
             height: "auto",
           },
         }}
