@@ -1,8 +1,0 @@
-body{
-    margin: 0;
-    padding: 0;
-}
-
-.search-input::placeholder{
-    color: var(--mid-gray-mid-gray-4, #9AA6AC);
-}
