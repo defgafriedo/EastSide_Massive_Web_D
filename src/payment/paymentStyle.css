@@ -1,0 +1,20 @@
+input {
+    cursor: pointer;
+}
+
+img {
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+}
+
+.payment {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 10px;
+}
+
+.payment td {
+    background-color: rgba(0, 0, 0, 0);
+    color: #fff;
+}
