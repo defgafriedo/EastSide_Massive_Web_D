@@ -2,23 +2,19 @@ import React, { useRef } from 'react';
 import { Card, Row, Col, Container, Table, Button } from 'react-bootstrap';
 import './dashboard.css';
 import drawing1 from '../img/background1.png';
-import { FaChevronRight } from "react-icons/fa";
-import { FaChevronLeft } from "react-icons/fa";
-
+import art1 from '../img/dashboard/art1.png';
+import art2 from '../img/dashboard/art2.png';
+import art3 from '../img/dashboard/art3.png';
+import art4 from '../img/dashboard/art4.png';
+import top1 from '../img/dashboard/top1.png';
+import top2 from '../img/dashboard/top2.png';
+import top3 from '../img/dashboard/top3.png';
+import testi1 from '../img/dashboard/testi1.png';
+import testi2 from '../img/dashboard/testi2.png';
+import testi3 from '../img/dashboard/testi3.png';
 const Dashboard = () => {
     const containerRef = useRef(null);
-
-    // const handleScrollRight = () => {
-    //     if (containerRef.current) {
-    //         containerRef.current.scrollLeft += 100;
-    //     }
-    // };
-    // const handleScrollLeft = () => {
-    //     if (containerRef.current) {
-    //         containerRef.current.scrollLeft -= 100;
-    //     }
-    // };
-    document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url('${drawing1}')`;
+    document.body.style.background = 'RED';
     document.body.style.backgroundSize = 'cover';
 
     return (
@@ -32,10 +28,46 @@ const Dashboard = () => {
 
                 <div className="horizontal-scroll-container" style={{ marginBottom: '4rem' }} ref={containerRef}>
 
-                    <Row style={{ flexWrap: 'nowrap' }} className="text-white text-center"> 
+                    <Row style={{ flexWrap: 'nowrap' }} className="text-white text-center">
                         <Col style={{ Width: '16rem' }}>
                             <Card className="mb-4" style={{ width: '16rem' }}>
-                                <Card.Img variant="top" src={drawing1} />
+                                <Card.Img variant="top" src={art1} />
+                                <Card.Body>
+                                    <Card.Title>Hopeless</Card.Title>
+                                    <Card.Text>Robin Hanson</Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col style={{ Width: '16rem' }}>
+                            <Card className="mb-4" style={{ width: '16rem' }}>
+                                <Card.Img variant="top" src={art2} />
+                                <Card.Body>
+                                    <Card.Title>Unconfident</Card.Title>
+                                    <Card.Text>Connely Rod</Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col style={{ Width: '16rem' }}>
+                            <Card className="mb-4" style={{ width: '16rem' }}>
+                                <Card.Img variant="top" src={art3} />
+                                <Card.Body>
+                                    <Card.Title>Dry and Tears</Card.Title>
+                                    <Card.Text>Calvin Nera</Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col style={{ Width: '16rem' }}>
+                            <Card className="mb-4" style={{ width: '16rem' }}>
+                                <Card.Img variant="top" src={art4} />
+                                <Card.Body>
+                                    <Card.Title>Goddess of Fortune</Card.Title>
+                                    <Card.Text>Jerry Lorenzo</Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col style={{ Width: '16rem' }}>
+                            <Card className="mb-4" style={{ width: '16rem' }}>
+                                <Card.Img variant="top" src={art1} />
                                 <Card.Body>
                                     <Card.Title>Card Title</Card.Title>
                                     <Card.Text>Some quick example</Card.Text>
@@ -44,43 +76,7 @@ const Dashboard = () => {
                         </Col>
                         <Col style={{ Width: '16rem' }}>
                             <Card className="mb-4" style={{ width: '16rem' }}>
-                                <Card.Img variant="top" src={drawing1} />
-                                <Card.Body>
-                                    <Card.Title>Card Title</Card.Title>
-                                    <Card.Text>Some quick example</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col style={{ Width: '16rem' }}>
-                            <Card className="mb-4" style={{ width: '16rem' }}>
-                                <Card.Img variant="top" src={drawing1} />
-                                <Card.Body>
-                                    <Card.Title>Card Title</Card.Title>
-                                    <Card.Text>Some quick example</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col style={{ Width: '16rem' }}>
-                            <Card className="mb-4" style={{ width: '16rem' }}>
-                                <Card.Img variant="top" src={drawing1} />
-                                <Card.Body>
-                                    <Card.Title>Card Title</Card.Title>
-                                    <Card.Text>Some quick example</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col style={{ Width: '16rem' }}>
-                            <Card className="mb-4" style={{ width: '16rem' }}>
-                                <Card.Img variant="top" src={drawing1} />
-                                <Card.Body>
-                                    <Card.Title>Card Title</Card.Title>
-                                    <Card.Text>Some quick example</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col style={{ Width: '16rem' }}>
-                            <Card className="mb-4" style={{ width: '16rem' }}>
-                                <Card.Img variant="top" src={drawing1} />
+                                <Card.Img variant="top" src={art2} />
                                 <Card.Body>
                                     <Card.Title>Card Title</Card.Title>
                                     <Card.Text>Some quick example</Card.Text>
@@ -89,40 +85,34 @@ const Dashboard = () => {
                         </Col>
                     </Row>
                 </div>
-                {/* <button className="scroll-button" onClick={handleScrollRight}>
-                <FaChevronRight />
-                </button>
-                <button className="scroll-button" onClick={handleScrollLeft}>
-                <FaChevronLeft />
-                </button> */}
                 <Container style={{ marginBottom: '2rem' }}>
                     <h1 style={{ color: 'white', fontSize: '2em' }}>Top 3 Artist</h1>
                 </Container>
                 <Row className="justify-content-center align-items-center" style={{ marginBottom: '4rem' }}>
                     <Col md="auto" style={{ marginRight: '4rem' }}>
                         <Card className="" style={{ width: '16rem' }}>
-                            <Card.Img variant="top" src={drawing1} />
+                            <Card.Img variant="top" src={top1} />
                             <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>Some quick example</Card.Text>
+                                <Card.Title>Fall Apart by Jidan Bjir</Card.Title>
+                                <Card.Text>Price: Rp 25.000.000,00</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
                     <Col md="auto">
                         <Card className="mb-5" style={{ width: '16rem' }}>
-                            <Card.Img variant="top" src={drawing1} />
+                            <Card.Img variant="top" src={top2} />
                             <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>Some quick example</Card.Text>
+                                <Card.Title>Lies by Jidan Bjir</Card.Title>
+                                <Card.Text>Price: Rp 25.000.000,00</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
                     <Col md="auto" style={{ marginLeft: '4rem' }}>
                         <Card style={{ width: '16rem' }}>
-                            <Card.Img variant="top" src={drawing1} />
+                            <Card.Img variant="top" src={top3} />
                             <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>Some quick example</Card.Text>
+                                <Card.Title>Blood Tsuki by Jidan Bjir</Card.Title>
+                                <Card.Text>Price: Rp 25.000.000,00</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -177,6 +167,10 @@ const Dashboard = () => {
                         </Table>
                     </Col>
                     <Col>
+                        <Container>
+                            <Button variant="outline-black">Trending</Button>
+                            <Button variant="outline-black">Top</Button>
+                        </Container>
                         <Table borderless variant="dark">
                             <thead>
                                 <tr className="block-example border-bottom border-white">
@@ -222,32 +216,48 @@ const Dashboard = () => {
                     </Col>
                 </Row>
                 <div className="black-background text-white text-center">
-                    <h4 style={{ marginBottom: '3rem',marginBottom: '3rem'  }}>Testimonial from success artists</h4>
-                    <Row className="justify-content-center align-items-center">
-                        <Col md="auto" style={{ marginRight: '4rem' }}>
-                            <Card className="" style={{ width: '16rem' }}>
-                                <Card.Img variant="top" src={drawing1} />
+                    <h4 style={{ marginBottom: '3rem', marginBottom: '3rem' }}>Testimonial from success artists</h4>
+                    <Row className="justify-content-center" >
+                        <Col md="auto" style={{ marginRight: '4rem' }} className='py-5'>
+                            <Card className="align-items-center py-5 px-3" style={{ width: '16rem', background: '#D9D9D9', }}>
+                                <Card.Img variant="top" src={testi1} style={{ width: '75px', height: '57px', objectFit: 'cover' }} />
                                 <Card.Body>
-                                    <Card.Title>Card Title</Card.Title>
-                                    <Card.Text>Some quick example</Card.Text>
+                                    <Card.Title style={{ color: 'black', fontSize: '16px' }}>Ananta Kun</Card.Title>
+                                    <Card.Text style={{ color: 'black', fontSize: '12px' }}>
+                                        <strong>Artist Top 2</strong>
+                                    </Card.Text>
+                                    <Card.Text style={{ color: 'black', fontSize: '12px' }}>
+                                        “There’s twin line beetwen life and death. U will find justice over there.”
+                                    </Card.Text>
                                 </Card.Body>
                             </Card>
+
                         </Col>
                         <Col md="auto">
-                            <Card className="" style={{ width: '16rem' }}>
-                                <Card.Img variant="top" src={drawing1} />
+                            <Card className="align-items-center py-5 px-3" style={{ width: '16rem', background: '#D9D9D9', }}>
+                                <Card.Img variant="top" src={testi1} style={{ width: '75px', height: '57px', objectFit: 'cover' }} />
                                 <Card.Body>
-                                    <Card.Title>Card Title</Card.Title>
-                                    <Card.Text>Some quick example</Card.Text>
+                                    <Card.Title style={{ color: 'black', fontSize: '16px' }}>Zidan Bjir</Card.Title>
+                                    <Card.Text style={{ color: 'black', fontSize: '12px' }}>
+                                        <strong>Artist Top 1</strong>
+                                    </Card.Text>
+                                    <Card.Text style={{ color: 'black', fontSize: '12px' }}>
+                                        “There’s twin line beetwen life and death. U will find justice over there.”
+                                    </Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
-                        <Col md="auto" style={{ marginLeft: '4rem' }}>
-                            <Card className="" style={{ width: '16rem' }}>
-                                <Card.Img variant="top" src={drawing1} />
+                        <Col md="auto" style={{ marginLeft: '4rem' }} className='py-5'>
+                            <Card className="align-items-center py-5 px-3" style={{ width: '16rem', background: '#D9D9D9', }}>
+                                <Card.Img variant="top" src={testi1} style={{ width: '75px', height: '57px', objectFit: 'cover' }} />
                                 <Card.Body>
-                                    <Card.Title>Card Title</Card.Title>
-                                    <Card.Text>Some quick example</Card.Text>
+                                    <Card.Title style={{ color: 'black', fontSize: '16px' }}>Reno Kun</Card.Title>
+                                    <Card.Text style={{ color: 'black', fontSize: '12px' }}>
+                                        <strong>Artist Top 3</strong>
+                                    </Card.Text>
+                                    <Card.Text style={{ color: 'black', fontSize: '12px' }}>
+                                        “There’s twin line beetwen life and death. U will find justice over there.”
+                                    </Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>

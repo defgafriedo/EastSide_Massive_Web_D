@@ -11,11 +11,11 @@ function Footer() {
       <div className="container">
         <div className="row">
           {/* Column1 */}
-          <div className="col">
+          <div className="col" style={{ display: "flex" }}>
             <img src={logo} alt="logo" />
           </div>
           {/* Column2 */}
-          <div className="col">
+          <div className="col" style={{ display: "flex" }}>
             <a href="#">Kontak</a>
             <a href="#">Tentang&nbsp;kami</a>
             <a href="#">Support</a>
