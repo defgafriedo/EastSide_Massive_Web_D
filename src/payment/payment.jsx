@@ -1,12 +1,12 @@
-import React from 'react';
-import { Container, Row, Col, Card, Table, Button } from 'react-bootstrap';
-import Dana from '../img/paymentLogo/Dana.png';
-import OVO from '../img/paymentLogo/OVO.png';
-import ShopeePay from '../img/paymentLogo/ShopeePay.png';
-import BRI from '../img/paymentLogo/bankBRI.png';
-import BCA from '../img/paymentLogo/BankBCA.png';
-import './paymentStyle.css';
-import Background3 from '../img/background3.png'
+import React from "react";
+import { Container, Row, Col, Card, Table, Button } from "react-bootstrap";
+import Dana from "../img/paymentLogo/Dana.png";
+import OVO from "../img/paymentLogo/OVO.png";
+import ShopeePay from "../img/paymentLogo/ShopeePay.png";
+import BRI from "../img/paymentLogo/bankBRI.png";
+import BCA from "../img/paymentLogo/BankBCA.png";
+import "./paymentStyle.css";
+import Background3 from "../img/background3.png";
 
 const Payment = () => {
   document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('${Background3}')`;
@@ -29,9 +29,18 @@ const Payment = () => {
               </label>
             </div>
             <div className="my-3">
-              <input type="radio" id="Shopee-pay" name="paymentMethod" value="Shopee-pay" />
+              <input
+                type="radio"
+                id="Shopee-pay"
+                name="paymentMethod"
+                value="Shopee-pay"
+              />
               <label htmlFor="Shopee-pay">
-                <img className="ShopeePay mx-3" src={ShopeePay} alt="ShopeePay" />
+                <img
+                  className="ShopeePay mx-3"
+                  src={ShopeePay}
+                  alt="ShopeePay"
+                />
               </label>
             </div>
           </div>
@@ -53,10 +62,10 @@ const Payment = () => {
         </Col>
 
         <Col md={4} className="my-3 mx-3">
-          <Card className='payment'>
+          <Card className="payment">
             <Card.Body>
               <Table borderless hover size="sm">
-                <tbody >
+                <tbody>
                   <tr>
                     <td className="text-start">Artwork Price</td>
                     <td className="text-end">Rp.900.000,00</td>

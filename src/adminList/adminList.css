@@ -1,5 +1,5 @@
   .custom-table {
-    background-color: transparent;
+    background-color: #212529;
     color: white;
   }
 
@@ -15,4 +15,17 @@
 
   .navbar-artist:hover {
     background-color: white;
+  }
+
+  .sidebarhover {
+    font-size: small;
+    width: 100%;
+    color: white;
+  }
+
+  .sidebarhover:hover {
+    color: black;
+    background-color: white;
+    font-size: small;
+
   }

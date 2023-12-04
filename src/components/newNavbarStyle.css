@@ -1,8 +1,29 @@
-body{
-    margin: 0;
-    padding: 0;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.search-input::placeholder{
-    color: var(--mid-gray-mid-gray-4, #9AA6AC);
+.search-input::placeholder {
+  color: var(--mid-gray-mid-gray-4, #9aa6ac);
+}
+
+.nav {
+  color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 12px;
+}
+.nav:hover {
+  color: #485aff;
+}
+
+.btn-login-custom {
+  border: 1px solid white;
+  background-color: #0b0b0b;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: white;
+}
+
+.btn-login-custom:hover {
+  background-color: white;
+  color: #0b0b0b;
 }

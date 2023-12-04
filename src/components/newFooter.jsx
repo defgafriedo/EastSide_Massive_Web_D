@@ -11,18 +11,18 @@ function Footer() {
       <div className="container">
         <div className="row">
           {/* Column1 */}
-          <div className="col">
+          <div className="col" style={{ display: "flex" }}>
             <img src={logo} alt="logo" />
           </div>
           {/* Column2 */}
-          <div className="col">
-            <a href="#">Kontak</a>
-            <a href="#">Tentang&nbsp;kami</a>
-            <a href="#">Support</a>
-            <a href="#">Kebijakan&nbsp;pribadi</a>
+          <div className="col" style={{ display: "flex" }}>
+            <a href="#" style={{fontSize:'16px' }}>Contact&nbsp;Us</a>
+            <a href="./aboutus" style={{fontSize:'16px' }}>About&nbsp;Us</a>
+            <a href="#" style={{fontSize:'16px' }}>Support</a>
+            <a href="#" style={{fontSize:'16px' }}>Privacy&nbsp;Policy</a>
           </div>
           {/* Column3 */}
-          <div className="col">
+          <div className="col" style={{ display: "flex" }}>
             <div className="icon-container">
               <FaTwitter className="icon" />
             </div>
