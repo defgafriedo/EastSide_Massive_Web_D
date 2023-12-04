@@ -6,6 +6,9 @@ import OrderList from './orderList/orderList'
 import Payment from './payment/payment'
 import OrderDetail from './orderDetail/orderDetail'
 import DetailShowcase from './detailShowcase/detailShowcase'
+import ProfileGalleryArtist from './ProfileGalleryArtist/ProfileGalleryArtist'
+import ProfileGalleryUser from './ProfileGalleryUser/ProfileGalleryUser'
+import Dashboard from './dashboard/dashboard'
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
           <Route path="/payment" element={<Payment/>} />
           <Route path="/order-detail" element ={<OrderDetail/>}/>
           <Route path="/detail-showcase" element ={<DetailShowcase/>}/>
+          <Route path="/profile-gallery-artist" element ={<ProfileGalleryArtist/>}/>
+          <Route path="/profile-gallery-user" element ={<ProfileGalleryUser/>}/>
+          <Route path="/dashboard" element ={<Dashboard/>}/>
         </Routes>
       </div>
     </Router>
