@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 
 function SignInForm(props) {
   const handleClick = () => {
@@ -144,7 +145,9 @@ function SignInForm(props) {
           </div>
         </div>
 
-        <button href="">Log In</button>
+        <Button className="btn-siglog" href="">
+          Log In
+        </Button>
       </form>
     </div>
   );

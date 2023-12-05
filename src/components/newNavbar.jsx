@@ -6,12 +6,22 @@ import {
   Button,
   Container,
 } from "react-bootstrap";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../img/logo.png";
 import { FaSearch } from "react-icons/fa";
 import "./newNavbarStyle.css";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 function NavBar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isAdminIn, setIsAdminIn] = useState(true);
+
+  function handleLogin() {
+    // Your login logic here
+    // Example: setIsLoggedIn(true);
+  }
   return (
     <>
       <Navbar
@@ -70,18 +80,36 @@ function NavBar() {
 
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link href="/order-list" className="me-5 nav">
-                Dashboard
+              <Nav.Link href="/dashboard" className="me-5 nav">
+                Home
               </Nav.Link>
-              <Nav.Link href="/list-profile-gallery" className="me-5 nav">
+              <Nav.Link href="/aboutus" className="me-5 nav">
                 About
               </Nav.Link>
-              <Nav.Link href="/payment" className="me-5 nav">
+              <Nav.Link href="#" className="me-5 nav">
                 List Artist
               </Nav.Link>
-              <Button href="/login" variant="primary">
-                Log In/Sign Up
-              </Button>
+
+              {isAdminIn && (
+                <Nav.Link href="/adminlist" className="me-5 nav">
+                  Dashboard
+                </Nav.Link>
+              )}
+
+              {!isLoggedIn && (
+                <Button href="/login" variant="primary">
+                  Log In/Sign Up
+                </Button>
+              )}
+              {isLoggedIn && (
+                <Button
+                  href="/profilegaleryartis"
+                  variant="primary"
+                  className="btn-login-custom"
+                >
+                  Username
+                </Button>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

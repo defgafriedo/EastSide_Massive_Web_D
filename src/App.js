@@ -5,8 +5,6 @@ import Login from "./loginSignup/Login-Signup-Page";
 import DashBoard from "./dashboard/dashboard";
 import DashboardPainting from "./dashboardPainting/dashboardPainting";
 import DashboardStatue from "./dashboardStatue/dashboardStatue";
-import Profile from "./profile/profile";
-import EditProfile from "./profile/editProfile";
 import AboutUs from "./aboutUs/aboutUs";
 import ListProfileGallery from "./listProfileGallery/listProfileGallery";
 import OrderList from "./orderList/orderList";
@@ -17,7 +15,17 @@ import Dashboard from "./dashboard/dashboard";
 import DetailPemesanan from "./detailPemesanan/detailPemesanan";
 import InputJualKarya from "./inputJualKarya/inputJualKarya";
 import InputPostingKarya from "./inputPostingKarya/inputPostingKarya";
+import AdminList from "./adminList/adminList";
+import AdminTransaction from "./adminList/adminTransaction";
+import AdminOverview from "./adminList/adminOverview";
+import ProfileGaleryArt from "./ProfileGalleryArtist/ProfileGalleryArtist";
+import ProfileGaleryUser from "./ProfileGalleryUser/ProfileGalleryUser";
 import FooTer from "./components/newFooter";
+
+import User1 from "./user/profile01/profile";
+import EditProfile1 from "./user/profile01/editProfile";
+import User2 from "./user/profile02/profile";
+import EditProfile2 from "./user/profile01/editProfile";
 
 function App() {
   return (
@@ -30,8 +38,6 @@ function App() {
           <Route path="/dashboard" element={<DashBoard />} />
           <Route path="/dashboardpainting" element={<DashboardPainting />} />
           <Route path="/dashboardstatue" element={<DashboardStatue />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route
             path="/list-profile-gallery"
@@ -40,7 +46,7 @@ function App() {
           <Route path="/order-list" element={<OrderList />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/order-detail" element={<OrderDetail />} />
-          <Route path="/detail-showcase" element={<DetailShowcase />} />
+          <Route path="/detailshowcase" element={<DetailShowcase />} />
           <Route
             path="/inputpostingkarya"
             element={<InputPostingKarya></InputPostingKarya>}
@@ -53,6 +59,18 @@ function App() {
             path="/detailpemesanan"
             element={<DetailPemesanan></DetailPemesanan>}
           />
+          <Route path="/adminlist" element={<AdminList />} />
+          <Route path="/adminTransaction" element={<AdminTransaction />} />
+          <Route path="/adminOverview" element={<AdminOverview />} />
+          <Route path="/profilegaleryartis" element={<ProfileGaleryArt />} />
+
+          <Route path="/profilegaleryuser" element={<ProfileGaleryUser />} />
+
+          {/*Route User*/}
+          <Route path="/user1" element={<User1 />} />
+          <Route path="/editprofile1" element={<EditProfile1 />} />
+          <Route path="/user2" element={<User2 />} />
+          <Route path="/editprofile2" element={<EditProfile2 />} />
         </Routes>
         <FooTer />
       </div>

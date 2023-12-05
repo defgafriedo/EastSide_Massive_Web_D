@@ -37,7 +37,7 @@ a:hover {
   color: rgb(25, 34, 217);
 }
 
-button {
+.btn-siglog {
   border-radius: 10px;
   background-color: rgb(25, 34, 217);
   color: #ffffff;
@@ -49,11 +49,11 @@ button {
   outline: none;
 }
 
-button:hover {
+.btn-siglog:hover {
   background-color: rgb(0, 0, 0);
 }
 
-button:active {
+.btn-siglog:active {
   transform: scale(0.95);
 }
 

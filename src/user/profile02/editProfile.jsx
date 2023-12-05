@@ -1,9 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Col, Row, Image, Button, Form } from "react-bootstrap";
 import React, { useState } from "react";
-import Background from "../img/profile/background2.png";
-import Photo from "../img/profile/contoh.png";
-import "./profileStyle.css";
+import Background from "../../img/profile/background2.png";
+import Photo from "../../img/profile/contoh.png";
+import "../profileStyle.css";
 
 function Editprofile() {
   document.body.style.backgroundImage = ` url('${Background}')`;

@@ -1,10 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Col, Row, Image, Button } from "react-bootstrap";
 import React, { useState } from "react";
-import Background from "../img/profile/background2.png";
-import Photo from "../img/profile/contoh.png";
-import Test from "../img/profile/yato.jpg";
-import "./profileStyle.css";
+import Background from "../../img/profile/background2.png";
+import Photo from "../../img/profile/contoh.png";
+import Test from "../../img/profile/yato.jpg";
+import "../profileStyle.css";
 
 function Profile() {
   document.body.style.backgroundImage = ` url('${Background}')`;
@@ -73,12 +73,18 @@ function Profile() {
           </Col>
           <Col
             className="pm-5 d-flex flex-column align-items-start"
-            style={{ marginRight: "40px" }}
+            style={{ marginRight: "34px" }}
           >
-            <Button className="edit-button d-flex align-items-start">
+            <Button
+              href="/editprofile1"
+              className="edit-button d-flex align-items-start"
+            >
               Edit&nbsp;profile
             </Button>
-            <Button className="edit-button d-flex align-items-start">
+            <Button
+              href="/login"
+              className="edit-button d-flex align-items-start"
+            >
               Logout
             </Button>
           </Col>

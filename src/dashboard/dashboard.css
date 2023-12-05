@@ -6,3 +6,83 @@
 .navbar-btn:hover {
   color: #485aff;
 }
+
+.horizontal-scroll-container {
+  overflow-x: auto;
+  /* Mengubah overflow-x menjadi auto agar scroll muncul hanya jika diperlukan */
+  white-space: nowrap;
+  border: 1px solid #000;
+  /* Menambahkan border dengan warna hitam */
+  padding: 5px;
+  /* Menambahkan padding agar kontennya tidak terlalu dekat dengan border */
+}
+
+/* Add a thin scrollbar */
+.horizontal-scroll-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: thin;
+  /* Firefox */
+  scrollbar-color: rgba(0, 0, 0, 0.1) rgba(67, 67, 67, 0.1);
+  /* Firefox */
+}
+
+/* WebKit (Chrome, Safari) */
+.horizontal-scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* WebKit (Chrome, Safari) */
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* WebKit (Chrome, Safari) */
+.horizontal-scroll-container::-webkit-scrollbar-track {
+  background-color: rgba(67, 67, 67, 0.1);
+}
+
+/* WebKit (Chrome, Safari) */
+.horizontal-scroll-container::-webkit-scrollbar-corner {
+  background-color: rgba(67, 67, 67, 0.1);
+}
+
+.black-background {
+  background-color: #212529;
+  margin-left: 10px;
+  /* Adjust the left margin as needed */
+  margin-right: 10px;
+  /* Adjust the right margin as needed */
+  padding-top: 15px;
+  /* Adjust the top padding as needed */
+  padding-bottom: 15px;
+  /* Adjust the bottom padding as needed */
+}
+
+.navbar-btn {
+  background-color: transparent;
+  color: white;
+  margin: 5px;
+}
+
+.body-testinominal {
+  padding: 5%;
+}
+
+@media screen and (max-width: 768px) {
+  .body-testinominal {
+    padding: 25%;
+  }
+
+  .top-3-artist {
+    padding: 30%;
+  }
+
+  .top-art-2 {
+    margin-right: 28%;
+  }
+
+  .top-art-3 {
+    margin-right: 55%;
+  }
+}

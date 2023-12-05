@@ -47,10 +47,18 @@ const Dashboard = () => {
     <div>
       <Container>
         <Container style={{ marginBottom: "1rem", marginTop: "2rem" }}>
-          <Button variant="outline-black" className="navbar-btn">
+          <Button
+            variant="outline-black"
+            className="navbar-btn"
+            href="/dashboard"
+          >
             All
           </Button>
-          <Button variant="outline-black" className="navbar-btn">
+          <Button
+            variant="outline-black"
+            className="navbar-btn"
+            href="/dashboardpainting"
+          >
             Painting
           </Button>
           <Button variant="outline-black" className="navbar-btn">

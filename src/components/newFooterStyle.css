@@ -14,7 +14,8 @@
   width: 100%;
   align-items: center;
   transition: color 0.3s ease;
-  margin-left: 70px;
+  justify-content: space-between;
+  margin-right: 50px;
 }
 
 .col a:hover {
@@ -52,8 +53,9 @@
 @media screen and (max-width: 900px) {
   .col a {
     padding: 1px;
+    margin-left: 6%;
   }
   .icon {
-    margin-left: 30%;
+    margin-left: 480%;
   }
 }
