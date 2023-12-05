@@ -14,6 +14,7 @@ import drawing7 from "../img/ProfileGalleryArtist/Drawing7.png";
 import drawing8 from "../img/ProfileGalleryArtist/Drawing8.png";
 import drawing10 from "../img/ProfileGalleryArtist/Drawing10.png";
 import BackgroundShowcase from "../img/background2.png";
+import { FaPlus } from "react-icons/fa";
 import Showcase from "./Showcase";
 import ForSale from "./ForSale";
 
@@ -110,6 +111,22 @@ const ProfileGalleryArtist = () => {
         }}
       >
         <Container className="py-5 my-4">
+          <div className="d-flex justify-content-end my-4 mx-3">
+            <button
+              variant="secondary"
+              className="d-flex align-items-center justify-content-center"
+              style={{
+                fontSize: "20px",
+                borderRadius: "50%",
+                width: "40px",
+                height: "40px",
+              }}
+            >
+              <Link to="/inputpostingkarya">
+                <FaPlus />
+              </Link>
+            </button>
+          </div>
           <Showcase itemShowcase={itemShowcase} />
         </Container>
       </div>
