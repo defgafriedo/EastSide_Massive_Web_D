@@ -86,7 +86,7 @@ function NavBar() {
               <Nav.Link href="/aboutus" className="me-5 nav">
                 About
               </Nav.Link>
-              <Nav.Link href="#" className="me-5 nav">
+              <Nav.Link href="list-seniman-gallery" className="me-5 nav">
                 List Artist
               </Nav.Link>
 

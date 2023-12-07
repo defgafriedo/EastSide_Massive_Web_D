@@ -73,11 +73,13 @@ const ProfileGalleryArtist = () => {
           style={{ marginTop: "50px" }}
         >
           <div className="mx-5">
-            <img
-              src={PhotoProfileArtist}
-              alt="Photo Profile Artist"
-              style={{ maxHeight: "100%", width: "auto" }}
-            />
+            <Link to="/user1">
+              <img
+                src={PhotoProfileArtist}
+                alt="Photo Profile Artist"
+                style={{ maxHeight: "100%", width: "auto" }}
+              />
+            </Link>
           </div>
           <div className="mx-5 my-3">
             <Row className="d-flex align-items-center">
