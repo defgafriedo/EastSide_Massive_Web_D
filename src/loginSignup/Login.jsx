@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,15 +14,26 @@ function SignInForm(props) {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    const storedUserId = localStorage.getItem('userId');
+    const storedUserLevel = localStorage.getItem('userLevel');
+
+    if (storedToken && storedUserId && storedUserLevel) {
+      navigate('/'); // Redirect to dashboard or appropriate route
+    }
+  }, [navigate]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/v1/atslog', {
-        email,
-        password,
-      });
-      console.log(response.data);
+      const response = await axios.post('http://localhost:5000/api/v1/atslog', { email, password, });
+
       if (response.data.success) {
+        localStorage.setItem('userId', response.data.userId);
+        localStorage.setItem('userName', response.data.userName);
+        localStorage.setItem('userLevel', response.data.userLevel);
+        localStorage.setItem('token', response.data.token);
         navigate('/');
       }
     } catch (error) {

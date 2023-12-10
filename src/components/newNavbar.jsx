@@ -6,22 +6,52 @@ import {
   Button,
   Container,
 } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../img/logo.png";
 import { FaSearch } from "react-icons/fa";
 import "./newNavbarStyle.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function NavBar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isAdminIn, setIsAdminIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdminIn, setIsAdminIn] = useState(false);
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    // Cek Local Storage saat komponen dimuat
+    const storedToken = localStorage.getItem("token");
+    const storedUserId= localStorage.getItem("userId");
+    const storedUserName = localStorage.getItem("userName")
+    const storedUserLevel = localStorage.getItem("userLevel");
+
+    if (storedToken && storedUserId && storedUserLevel) {
+      setIsLoggedIn(true);
+      setUsername(storedUserName);
+      if (storedUserLevel === 'user') {
+        setIsAdminIn(false);
+      } else if (storedUserLevel === 'admin') {
+        setIsAdminIn(true);
+      }
+    } else {
+      setIsLoggedIn(false);
+      setIsAdminIn(false);
+    }
+  }, []);
 
   function handleLogin() {
     // Your login logic here
     // Example: setIsLoggedIn(true);
+  }
+  function handleLogout() {
+    setIsLoggedIn(false);
+    setIsAdminIn(false);
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userLevel");
   }
   return (
     <>
@@ -83,19 +113,24 @@ function NavBar() {
 
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="ms-auto" >
-              <Nav.Link href="/dashboard" className="me-5 nav" style={{fontSize:'16px' }}>
+              <Nav.Link href="/dashboard" className="me-5 nav" style={{ fontSize: '16px' }}>
                 Home
               </Nav.Link>
-              <Nav.Link href="/aboutus" className="me-5 nav" style={{fontSize:'16px' }}>
+              <Nav.Link href="/aboutus" className="me-5 nav" style={{ fontSize: '16px' }}>
                 About
               </Nav.Link>
-              <Nav.Link href="#" className="me-5 nav" style={{fontSize:'16px' }}>
+              <Nav.Link href="#" className="me-5 nav" style={{ fontSize: '16px' }}>
                 List Artist
               </Nav.Link>
 
               {isAdminIn && (
-                <Nav.Link href="/admin/adminOverview" className="me-5 nav" style={{fontSize:'16px' }}>
+                <Nav.Link href="/admin/adminOverview" className="me-5 nav" style={{ fontSize: '16px' }}>
                   Dashboard
+                </Nav.Link>
+              )}
+              {!isAdminIn && (
+                <Nav.Link onClick={handleLogout} className="me-5 nav" style={{ fontSize: '16px' }}>
+                  Logout
                 </Nav.Link>
               )}
 
@@ -110,8 +145,10 @@ function NavBar() {
                   variant="primary"
                   className="btn-login-custom"
                 >
-                  Username
+                {username}
                 </Button>
+
+
               )}
             </Nav>
           </Navbar.Collapse>
