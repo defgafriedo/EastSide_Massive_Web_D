@@ -4,10 +4,34 @@ import React, { useState } from "react";
 import Background from "../../img/profile/background2.png";
 import Photo from "../../img/profile/contoh.png";
 import "../profileStyle.css";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Editprofile() {
   document.body.style.backgroundImage = ` url('${Background}')`;
   document.body.style.backgroundSize = "cover";
+  const navigate = useNavigate();
+
+
+
+  const storedUserId = localStorage.getItem("userId");
+  const [file, setFile] = useState(null);
+  const [fileURL, setFileURL] = useState(null);
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    const fileURL = URL.createObjectURL(selectedFile);
+
+    setFile(selectedFile);
+    setFileURL(fileURL);
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      image: selectedFile,
+    }));
+  };
+
+
 
   const [kategoriArtist] = useState([
     "Statue",
@@ -19,26 +43,58 @@ function Editprofile() {
   ]);
 
   const [formData, setFormData] = useState({
-    email: "",
     nama: "",
     nomerKontak: "",
     alamat: "",
-    facebook: "",
-    instagram: "",
+    tagline: "",
+    deskripsi: "",
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Data Formulir:", formData);
+
+
+    if (!file) {
+      console.log("Please select an image.");
+      return;
+    }
+
+
+    const randomImageName = `image_${Date.now()}_${Math.floor(
+      Math.random() * 1000
+    )}${file.name.substring(file.name.lastIndexOf("."))}`;
+    const formDataObject = new FormData();
+    formDataObject.append("file", file, randomImageName);
+    formDataObject.append("id_user", storedUserId);
+    formDataObject.append("nama", formData.nama);
+    formDataObject.append("nomor", formData.nomerKontak);
+    formDataObject.append("alamat", formData.alamat);
+    formDataObject.append("tagline", formData.tagline);
+    formDataObject.append("deskripsi", formData.deskripsi);
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/v1/atsupdateuser", formDataObject);
+
+      if (response.success) {
+        navigate('/user1')
+        console.log("Form data submitted successfully");
+
+      } else {
+        console.error("Failed to submit form data");
+      }
+    } catch (error) {
+      console.error("Error submitting form data:", error);
+    }
   };
 
   return (
     <Container
       fluid
+      className="d-flex justify-content-center align-items-start"
       style={{
         backgroundsize: "cover",
         backgroundrepeat: "no-repeat",
@@ -71,11 +127,24 @@ function Editprofile() {
         <Col>
           <Col className="d-flex justify-content-center">
             <Col xs={8} className="p-2 text-center mt-2">
-              <Image
-                src={`${Photo}`}
-                style={{ backgroundColor: "white" }}
-                roundedCircle
-              />
+              {fileURL ? (
+                <Image
+                  src={fileURL}
+                  alt="File Preview"
+                  style={{ width: "80px", height: "80px", marginTop: "10px" }}
+                  roundedCircle
+                />
+              ) : (
+                <>
+                  <Image
+                    src={`${Photo}`}
+                    style={{ backgroundColor: "white" }}
+                    roundedCircle
+                  />
+
+                </>
+              )}
+
 
               <h5 className="mt-2" style={{ color: "white" }}>
                 Nickname
@@ -106,9 +175,10 @@ function Editprofile() {
           style={{
             backgroundColor: "#292929",
             width: "550px",
-            height: "650px",
+            height: "740px",
             borderRadius: "5px",
             marginLeft: "30px",
+            marginBottom: "50px",
           }}
         >
           <Form
@@ -119,6 +189,7 @@ function Editprofile() {
               display: "flex",
               justifyContent: "flex-start",
               alignItems: "flex-start",
+
             }}
           >
             <h2
@@ -131,7 +202,8 @@ function Editprofile() {
               Account Settings
             </h2>
 
-            <Form.Group controlId="email">
+
+            <Form.Group controlId="formFile" className="mb-3">
               <Form.Label
                 style={{
                   display: "block",
@@ -139,16 +211,9 @@ function Editprofile() {
                   marginTop: "10px",
                 }}
               >
-                Email Address
+                Profile
               </Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="form-isi"
-              />
+              <Form.Control type="file" onChange={handleFileChange} style={{ background: "#292929", color: "white" }} />
             </Form.Group>
 
             <Form.Group controlId="nama">
@@ -210,7 +275,7 @@ function Editprofile() {
                 className="form-isi"
               />
             </Form.Group>
-            <Form.Group controlId="facebook">
+            <Form.Group controlId="tagline">
               <Form.Label
                 style={{
                   display: "block",
@@ -218,17 +283,17 @@ function Editprofile() {
                   marginTop: "10px",
                 }}
               >
-                Facebook:
+                Tagline:
               </Form.Label>
               <Form.Control
                 type="text"
-                name="facebook"
-                value={formData.facebook}
+                name="tagline"
+                value={formData.tagline}
                 onChange={handleChange}
                 className="form-isi"
               />
             </Form.Group>
-            <Form.Group controlId="instagram">
+            <Form.Group controlId="description">
               <Form.Label
                 style={{
                   display: "block",
@@ -236,16 +301,18 @@ function Editprofile() {
                   marginTop: "10px",
                 }}
               >
-                Instagram:
+                Description:
               </Form.Label>
               <Form.Control
-                type="text"
-                name="instagram"
-                value={formData.instagram}
+                as="textarea"
+                rows={3}
+                name="deskripsi"
+                value={formData.deskripsi}
                 onChange={handleChange}
                 className="form-isi"
               />
             </Form.Group>
+
             <Button
               variant="primary"
               type="submit"
@@ -280,15 +347,7 @@ function Editprofile() {
             January 11 1988 in Surabaya, Ahmad has explored the world of art
             from a young age, building a strong foundation for his creativity.
           </p>
-          <Button
-            className="edit-description-button"
-            style={{
-              fontStyle: "italic",
-              borderRadius: "5px",
-            }}
-          >
-            Edit Description
-          </Button>
+
           <Col
             style={{
               display: "flex",

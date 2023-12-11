@@ -12,51 +12,82 @@ import top3 from "../img/dashboard/top3.png";
 import testi1 from "../img/dashboard/testi1.png";
 import testi2 from "../img/dashboard/testi2.png";
 import testi3 from "../img/dashboard/testi3.png";
+
 const Dashboard = () => {
   const containerRef = useRef(null);
   document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url('${drawing1}')`;
 
-  const [imageArt] = useState([art1, art2, art3, art4, art1, art2, art3]);
+  const cardData = [
+    {
+      image: require("../img/dashboard/art1.png"),
+      title: "Hopeless",
+      description: "Robin Hanson",
+    },
+    {
+      image: require("../img/dashboard/art2.png"),
+      title: "Unconfident",
+      description: "Connely Rod",
+    },
+    {
+      image: art3,
+      title: "Dry and Tears",
+      description: "Calvin Nera",
+    },
+  ];
 
-  const [cardTitle] = useState([
-    "Hopeless",
-    "Unconfident",
-    "Dry and Tears",
-    "Goddess of Fortune",
-    "Card Title",
-    "Card Title",
-    "Card Title",
-  ]);
+  const tableData = [
+    {
+      artist: "Nanmaru Yamada",
+      price: 1000000,
+      sumOfArt: 200,
+    },
+    {
+      artist: "Nova Phoenixblade",
+      price: 2000000,
+      sumOfArt: 105,
+    },
+    {
+      artist: "Luna Stormshard",
+      price: 3500000,
+      sumOfArt: 170,
+    },
+    {
+      artist: "Seraphina Darkflame",
+      price: 1000000,
+      sumOfArt: 160,
+    },
+    {
+      artist: "Orion Frostbane",
+      price: 100000,
+      sumOfArt: 200,
+    },
+    {
+      artist: "Seraphina Darkflame",
+      price: 10000000,
+      sumOfArt: 305,
+    },
+    {
+      artist: "Zenith Thunderhawk",
+      price: 15000000,
+      sumOfArt: 400,
+    },
+    {
+      artist: "Cipher Nightshade",
+      price: 70000000,
+      sumOfArt: 100,
+    },
+    {
+      artist: "Astral Ironheart",
+      price: 1000000,
+      sumOfArt: 70,
+    },
+    {
+      artist: "Zephyr Steelwing",
+      price: 2000000,
+      sumOfArt: 10,
+    },
+  ];
 
-  const [shortDescription] = useState([
-    "Robin Hanson",
-    "Connely Rod",
-    "Calvin Nera",
-    "Jerry Lorenzo",
-    "Some quick example",
-    "Some quick example",
-    "Some quick example",
-  ]);
-
-  const [artist] = useState([
-    "Nanmaru Yamada",
-    "Nova Phoenixblade",
-    "Luna Stormshard",
-    "Seraphina Darkflame",
-    "Orion Frostbane",
-    "Seraphina Darkflame",
-    "Zenith Thunderhawk",
-    "Cipher Nightshade",
-    "Astral Ironheart",
-    "Zephyr Steelwing",
-  ]);
-
-  const [price] = useState([
-    1000000, 2000000, 3500000, 1000000, 100000, 10000000, 15000000, 70000000,
-    1000000, 2000000,
-  ]);
-
-  const [sumOfArt] = useState([200, 105, 170, 160, 200, 305, 400, 100, 70, 10]);
 
   return (
     <div>
@@ -78,7 +109,7 @@ const Dashboard = () => {
             variant="outline-black"
             className="navbar-btn"
             href="/dashboardpainting"
-            
+
           >
             Painting
           </Button>
@@ -107,13 +138,13 @@ const Dashboard = () => {
             style={{ flexWrap: "nowrap" }}
             className="text-white text-center"
           >
-            {cardTitle.map((cardtitle, index) => (
+            {cardData.map((card, index) => (
               <Col style={{ Width: "16rem" }} key={index}>
                 <Card className="mb-4" style={{ width: "16rem" }}>
-                  <Card.Img variant="top" src={imageArt[index]} />
+                  <Card.Img variant="top" src={card.image} />
                   <Card.Body>
-                    <Card.Title style={{fontSize:'22px'}}>{cardtitle}</Card.Title>
-                    <Card.Text style={{fontSize:'16px'}}>{shortDescription[index]}</Card.Text>
+                    <Card.Title style={{ fontSize: '22px' }}>{card.title}</Card.Title>
+                    <Card.Text style={{ fontSize: '16px' }}>{card.description}</Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
@@ -176,13 +207,13 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {artist.slice(0, 5).map((item, index) => (
+                {tableData.slice(0, 5).map((item, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{item}</td>
-                    <td>{price[index]}</td>
+                    <td>{item.artist}</td>
+                    <td>{item.price}</td>
                     <td style={{ display: "flex", justifyContent: "center" }}>
-                      {sumOfArt[index]}
+                      {item.sumOfArt}
                     </td>
                   </tr>
                 ))}
@@ -204,13 +235,13 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {artist.slice(5, 10).map((item, index) => (
+                {tableData.slice(5, 10).map((item, index) => (
                   <tr key={index}>
                     <td>{index + 6}</td>
-                    <td>{item}</td>
-                    <td>{price[index]}</td>
+                    <td>{item.artist}</td>
+                    <td>{item.price}</td>
                     <td style={{ display: "flex", justifyContent: "center" }}>
-                      {sumOfArt[index]}
+                      {item.sumOfArt}
                     </td>
                   </tr>
                 ))}

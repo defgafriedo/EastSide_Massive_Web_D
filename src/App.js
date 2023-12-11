@@ -24,8 +24,6 @@ import FooTer from "./components/newFooter";
 
 import User1 from "./user/profile01/profile";
 import EditProfile1 from "./user/profile01/editProfile";
-import User2 from "./user/profile02/profile";
-import EditProfile2 from "./user/profile01/editProfile";
 
 function App() {
   return (
@@ -70,8 +68,6 @@ function App() {
                   <Route path="/profilegaleryuser" element={<ProfileGaleryUser />} />
                   <Route path="/user1" element={<User1 />} />
                   <Route path="/editprofile1" element={<EditProfile1 />} />
-                  <Route path="/user2" element={<User2 />} />
-                  <Route path="/editprofile2" element={<EditProfile2 />} />
                 </Routes>
                 <FooTer />
               </>

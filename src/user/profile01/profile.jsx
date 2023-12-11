@@ -1,13 +1,51 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Col, Row, Image, Button } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Background from "../../img/profile/background2.png";
-import Photo from "../../img/profile/contoh.png";
 import Test from "../../img/profile/yato.jpg";
 import "../profileStyle.css";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Profile() {
   document.body.style.backgroundImage = ` url('${Background}')`;
+
+  const storedUserId = localStorage.getItem("userId");
+  const [photo, setPhoto] = useState("");
+  
+
+  useEffect(() => {
+    const fetchUserById = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/v1/atsgetuser", {
+          params: {
+            id_user: storedUserId
+          }
+        });
+  
+        if (response.data.success && response.data.user) {
+          console.log("api", response.data.user.image);
+          // setPhoto(response.data.user.image);
+          const delimiter = "/EastSide_Massive_Web_D";
+          const basePath = '../..';
+          const slicedPath = response.data.user.image.substring(response.data.user.image.indexOf(delimiter) + delimiter.length);
+          const fullPath = basePath + slicedPath; 
+          console.log("api", fullPath);
+
+        } else {
+          console.error("sad",response.data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    const img = require('../../img/asset/profileAsset/image_1702273774438_829.png');
+    setPhoto(img);
+    fetchUserById(); // Call the asynchronous function
+  }, []); // Ensure the dependency array is empty if you want it to run only once
+  
+
+
 
   const [images] = useState([Test, Test, Test, Test, Test]);
   const [kategoriArtist] = useState([
@@ -28,6 +66,7 @@ function Profile() {
   return (
     <Container
       fluid
+      className="d-flex justify-content-center align-items-start"
       style={{
         backgroundsize: "cover",
         backgroundrepeat: "no-repeat",
@@ -61,10 +100,12 @@ function Profile() {
           <Col className="d-flex justify-content-center">
             <Col xs={8} className="p-2 text-center mt-2">
               <Image
-                src={`${Photo}`}
+                src={photo}
+                alt="user"
                 style={{ backgroundColor: "white" }}
                 roundedCircle
               />
+              
 
               <h5 className="mt-2" style={{ color: "white" }}>
                 Nickname
