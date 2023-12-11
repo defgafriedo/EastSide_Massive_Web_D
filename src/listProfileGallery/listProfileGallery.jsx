@@ -29,9 +29,8 @@ function ListProfileGallery() {
 
   const processPhoto = (photo) => {
     if (!photo) {
-      return ''; // handle undefined or null case
+      return '';
     }
-
     const delimiter = "karyaAsset/";
     const basePath = 'http://localhost:5000/karya/';
     const slicedPath = photo.substring(photo.indexOf(delimiter) + delimiter.length);
@@ -43,7 +42,6 @@ function ListProfileGallery() {
   return (
     <>
       <Container className="my-5 d-flex justify-content-center align-items-center">
-
         <Row>
           {galleryData.map((art, index) => (
             <Col className="mx-4 my-4" key={index}>
@@ -57,7 +55,6 @@ function ListProfileGallery() {
             </Col>
           ))}
         </Row>
-
       </Container>
     </>
   );

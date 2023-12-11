@@ -122,18 +122,13 @@ function NavBar() {
               <Nav.Link href="/aboutus" className="me-5 nav" style={{ fontSize: '16px' }}>
                 About
               </Nav.Link>
-              <Nav.Link href="#" className="me-5 nav" style={{ fontSize: '16px' }}>
+              <Nav.Link href="/listprofileseniman" className="me-5 nav" style={{ fontSize: '16px' }}>
                 List Artist
               </Nav.Link>
 
               {isAdminIn && (
                 <Nav.Link href="/admin/adminOverview" className="me-5 nav" style={{ fontSize: '16px' }}>
                   Dashboard
-                </Nav.Link>
-              )}
-              {!isAdminIn && (
-                <Nav.Link onClick={handleLogout} className="me-5 nav" style={{ fontSize: '16px' }}>
-                  Logout
                 </Nav.Link>
               )}
 
@@ -160,7 +155,7 @@ function NavBar() {
 
                 <Dropdown.Menu className="dropdown-menu-end">
                   <Dropdown.Item
-                    href="#/action-4"
+                    href="/profilegaleryartis"
                     style={{ display: "flex" }}
                   >
                     <Image
@@ -189,11 +184,11 @@ function NavBar() {
                   </Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item href="/user1">View profile</Dropdown.Item>
-                  <Dropdown.Item href="/">Setting</Dropdown.Item>
+                  <Dropdown.Item href="/editprofile1">Setting</Dropdown.Item>
                   <Dropdown.Item href="/order-list">
                     Status Orderer
                   </Dropdown.Item>
-                  <Dropdown.Item href="/login">Log out</Dropdown.Item>
+                  <Dropdown.Item href="/login" onClick={handleLogout}>Log out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
 

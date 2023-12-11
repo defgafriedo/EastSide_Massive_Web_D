@@ -259,5 +259,76 @@ const getListGallery = async (req, res) => {
     }
 
 }
+const getListProfileSeniman = async (req, res) => {
+    try {
+        const sql = await query(`
+        SELECT art.*, user.nama AS artist_name, user.image AS user_image FROM art 
+        INNER JOIN user
+        ON art.id_user = user.id
+        `);
 
-module.exports = {getListGallery, getLogUser, addUser, addArtwork, addSellArtwork, getAllArtwork, updateUserData, getUserById, staticPath, upload, uploadp, karyaPath }
+        return res.status(200).json({ success: true, data: sql });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({
+            message: 'Data tidak ditemukan',
+            error: error.message
+        });
+    }
+}
+
+const getShowcaseProfile = async (req, res) => {
+    try {
+        const sql = await query(`
+        SELECT * FROM art
+        WHERE jenis = 'showcase'
+        `);
+
+        return res.status(200).json({ success: true, data: sql });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({
+            message: 'Data tidak ditemukan',
+            error: error.message
+        });
+    }
+}
+const getSaleProfile = async (req, res) => {
+    try {
+        const sql = await query(`
+        SELECT * FROM art
+        WHERE jenis = 'sale'
+        `);
+
+        return res.status(200).json({ success: true, data: sql });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({
+            message: 'Data tidak ditemukan',
+            error: error.message
+        });
+    }
+}
+const getShowOrder = async (req, res) => {
+    try {
+        const { id_pembeli } = req.params;
+
+        const sql = await query(`
+          SELECT *
+          FROM transaksi
+          INNER JOIN art ON transaksi.id_art = art.id
+          WHERE transaksi.id_pembeli = ?
+        `, [id_pembeli]);
+
+        return res.status(200).json({ success: true, message: sql });
+    } catch (error) {
+        console.error(error);
+
+        res.status(400).json({
+            message: 'Gagal mendapatkan data transaksi. Terjadi kesalahan pada server.',
+            error: error.message,
+        });
+    }
+};
+
+module.exports = {getShowOrder, getShowcaseProfile, getSaleProfile, getListProfileSeniman, getListGallery, getLogUser, addUser, addArtwork, addSellArtwork, getAllArtwork, updateUserData, getUserById, staticPath, upload, uploadp, karyaPath }

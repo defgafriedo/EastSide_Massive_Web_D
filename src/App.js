@@ -21,6 +21,8 @@ import AdminOverview from "./adminList/adminOverview";
 import ProfileGaleryArt from "./ProfileGalleryArtist/ProfileGalleryArtist";
 import ProfileGaleryUser from "./ProfileGalleryUser/ProfileGalleryUser";
 import FooTer from "./components/newFooter";
+import ListProfileSeniman from './listProfileSeniman/listProfileSeniman'
+
 
 import User1 from "./user/profile01/profile";
 import EditProfile1 from "./user/profile01/editProfile";
@@ -68,6 +70,7 @@ function App() {
                   <Route path="/profilegaleryuser" element={<ProfileGaleryUser />} />
                   <Route path="/user1" element={<User1 />} />
                   <Route path="/editprofile1" element={<EditProfile1 />} />
+                  <Route path="/listprofileseniman" element={<ListProfileSeniman/>}/>
                 </Routes>
                 <FooTer />
               </>

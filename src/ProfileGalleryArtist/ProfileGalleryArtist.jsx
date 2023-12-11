@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -7,54 +7,42 @@ import PhotoProfileArtist from "../img/ProfileGalleryArtist/photoProfileArtist.p
 import drawing1 from "../img/listProfileGallery/Drawing1.png";
 import drawing2 from "../img/ProfileGalleryArtist/Drawing2.png";
 import drawing3 from "../img/ProfileGalleryArtist/Drawing3.png";
-import drawing4 from "../img/ProfileGalleryArtist/Drawing4.png";
-import drawing5 from "../img/ProfileGalleryArtist/Drawing5.png";
-import drawing6 from "../img/ProfileGalleryArtist/Drawing6.png";
-import drawing7 from "../img/ProfileGalleryArtist/Drawing7.png";
-import drawing8 from "../img/ProfileGalleryArtist/Drawing8.png";
-import drawing10 from "../img/ProfileGalleryArtist/Drawing10.png";
 import BackgroundShowcase from "../img/background2.png";
 import { FaPlus } from "react-icons/fa";
 import Showcase from "./Showcase";
 import ForSale from "./ForSale";
+import axios from 'axios';
+
 
 const ProfileGalleryArtist = () => {
   document.body.style.backgroundImage = `url('${BackgroundProfileGallery}')`;
   document.body.style.backgroundColor = "black";
   document.body.style.backgroundRepeat = "no-repeat";
 
-  const [itemShowcase, setItemShowcase] = useState([
-    {
-      image: drawing1,
-      title: "Lies",
-      description:
-        "“There’s twin line beetwen life and death. U will find justice over there.”",
-      link: "/detailshowcase",
-    },
-    {
-      image: drawing2,
-      title: "Lies",
-      description:
-        "“There’s twin line beetwen life and death. U will find justice over there.”",
-      link: "/detailshowcase",
-    },
-    {
-      image: drawing10,
-      title: "Lies",
-      description:
-        "“There’s twin line beetwen life and death. U will find justice over there.”",
-      link: "/detailshowcase",
-    },
-  ]);
+  const [itemShowcase, setItemShowcase] = useState([]);
+  const [itemForSale, setItemForSale] = useState([]);
 
-  const [itemForSale, setItemForSale] = useState([
-    { image: drawing3, title: "Lies", price: "Rp.3000", link: "/order-list" },
-    { image: drawing4, title: "Lies", price: "Rp.3000" },
-    { image: drawing5, title: "Lies", price: "Rp.3000" },
-    { image: drawing6, title: "Lies", price: "Rp.3000" },
-    { image: drawing7, title: "Lies", price: "Rp.3000" },
-    { image: drawing8, title: "Lies", price: "Rp.3000" },
-  ]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (itemShowcase) {
+          const response = await axios.get('http://localhost:5000/api/v1/atsShowcaseProfile');
+          const data = response.data;
+          setItemShowcase(data.data);
+        }
+        if (itemForSale) {
+          const response = await axios.get('http://localhost:5000/api/v1/atsSaleProfile');
+          const data = response.data;
+          setItemForSale(data.data);
+        }
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
