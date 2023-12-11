@@ -14,7 +14,7 @@ const OrderList = ({ idPembeli }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/v1/atsShowOrder/11`);
+        const response = await axios.get(`http://localhost:5000/api/v1/atsShowOrder/35`);
         const data = response.data;
         setOrderData(data.message);
       } catch (error) {

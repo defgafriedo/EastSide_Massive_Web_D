@@ -4,8 +4,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
-const staticPath =path.join(__dirname, '..', 'src', 'img', 'asset' , 'profileAsset')
-const karyaPath =path.join(__dirname, '..', 'src', 'img', 'asset' , 'karyaAsset')
+const staticPath = path.join(__dirname, '..', 'src', 'img', 'asset', 'profileAsset')
+const karyaPath = path.join(__dirname, '..', 'src', 'img', 'asset', 'karyaAsset')
 // app.use('/img/artAssets', express.static(path.join(__dirname, '..', 'src', 'img', 'asset' , 'profileAsset')));
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -88,7 +88,7 @@ const addUser = async (req, res) => {
         const hashedPassword = bcrypt.hashSync('user123', 10);
         const sql = await query('INSERT INTO user (uuid, nama, email, password, level) VALUES (?, ?, ?, ?, ?)', [randomUUID(), username, email, hashedPassword, 'user']);
         const isMatch = bcrypt.compareSync('user123', hashedPassword);
-        return res.status(200).json({ success: true, message: sql, aaa: hashedPassword, aa:isMatch });
+        return res.status(200).json({ success: true, message: sql, aaa: hashedPassword, aa: isMatch });
     } catch (error) {
         console.error(error);
 
@@ -114,7 +114,7 @@ const addArtwork = async (req, res) => {
         const imageP = imagePath.replace(/\\/g, "/");
         const sql = await query(
             'INSERT INTO art (id_user, nama, harga, kategori, jenis, tag, deskripsi, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [id_user, nama, 0, kategori, "lukisan", tag, deskripsi, imageP]
+            [id_user, nama, 0, kategori, "showcase", tag, deskripsi, imageP]
         );
 
         return res.status(200).json({ success: true, message: sql });
@@ -144,7 +144,7 @@ const addSellArtwork = async (req, res) => {
         const imageP = imagePath.replace(/\\/g, "/");
         const sql = await query(
             'INSERT INTO art (id_user, nama, harga, kategori, jenis, tag, deskripsi, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [id_user, nama, price, kategori, "lukisan", tag, deskripsi, imageP]
+            [id_user, nama, price, kategori, "sale", tag, deskripsi, imageP]
         );
 
         return res.status(200).json({ success: true, message: sql });
@@ -165,11 +165,16 @@ const getAllArtwork = async (req, res) => {
         if (artworks.length === 0) {
             return res.status(404).json({ success: false, message: 'No artwork found' });
         }
+        const artList = artworks.map(item => ({
+            judul: item.nama,
+            artist: item.artist_name,
+            image: item.image
+        }));
 
         return res.status(200).json({
             success: true,
             message: 'Artwork retrieved successfully',
-            artworks,
+            artList,
         });
 
     } catch (error) {
@@ -178,7 +183,7 @@ const getAllArtwork = async (req, res) => {
 }
 
 const updateUserData = async (req, res) => {
-    const { id_user, nama, nomor, alamat, tagline, deskripsi} = req.body;
+    const { id_user, nama, nomor, alamat, tagline, deskripsi } = req.body;
 
     try {
         if (!req.file || !req.file.path) {
@@ -331,4 +336,4 @@ const getShowOrder = async (req, res) => {
     }
 };
 
-module.exports = {getShowOrder, getShowcaseProfile, getSaleProfile, getListProfileSeniman, getListGallery, getLogUser, addUser, addArtwork, addSellArtwork, getAllArtwork, updateUserData, getUserById, staticPath, upload, uploadp, karyaPath }
+module.exports = { getShowOrder, getShowcaseProfile, getSaleProfile, getListProfileSeniman, getListGallery, getLogUser, addUser, addArtwork, addSellArtwork, getAllArtwork, updateUserData, getUserById, staticPath, upload, uploadp, karyaPath }

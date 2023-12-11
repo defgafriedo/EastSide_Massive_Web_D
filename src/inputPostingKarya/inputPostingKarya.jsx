@@ -8,12 +8,14 @@ import Button from "react-bootstrap/Button";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Nav from "react-bootstrap/Nav";
+import background from "../img/background1.png";
 import Card from "react-bootstrap/Card";
-import "./inputPostingKarya.css";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const InputPostingKarya = () => {
+  document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url('${background}')`;
+
   const navigate = useNavigate();
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
@@ -72,8 +74,8 @@ const InputPostingKarya = () => {
     formDataObject.append("file", file, randomImageName);
     formDataObject.append("id_user", localStorage.getItem("userId"));
     formDataObject.append("nama", formData.artworkTitle);
-    formDataObject.append("kategori", formData.artworkTheme);
-    formDataObject.append("tag", formData.artworkType);
+    formDataObject.append("kategori", formData.artworkType);
+    formDataObject.append("tag", formData.artworkTheme);
     formDataObject.append("deskripsi", formData.description);
 
     try {

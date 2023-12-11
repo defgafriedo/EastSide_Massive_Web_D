@@ -12,7 +12,7 @@ function Profile() {
 
   const storedUserId = localStorage.getItem("userId");
   const [photo, setPhoto] = useState("");
-  
+  const [name, setName] = useState("");
 
   useEffect(() => {
     const fetchUserById = async () => {
@@ -32,6 +32,7 @@ function Profile() {
           const fullPath =  `${basePath}${slicedPath}`;
           const fileURL = fullPath;
           setPhoto(fileURL);
+          setName(response.data.user.nama);
           console.log("api",fullPath);
 
         } else {
@@ -110,7 +111,7 @@ function Profile() {
               
 
               <h5 className="mt-2" style={{ color: "white" }}>
-                Nickname
+                {name}
               </h5>
             </Col>
           </Col>

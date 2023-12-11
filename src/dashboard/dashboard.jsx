@@ -1,11 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import { Card, Row, Col, Container, Table, Button } from "react-bootstrap";
 import "./dashboard.css";
-import drawing1 from "../img/background1.png";
-import art1 from "../img/dashboard/art1.png";
-import art2 from "../img/dashboard/art2.png";
-import art3 from "../img/dashboard/art3.png";
-import art4 from "../img/dashboard/art4.png";
+import background from "../img/background1.png";
+import axios from 'axios';
 import top1 from "../img/dashboard/top1.png";
 import top2 from "../img/dashboard/top2.png";
 import top3 from "../img/dashboard/top3.png";
@@ -14,26 +11,36 @@ import testi2 from "../img/dashboard/testi2.png";
 import testi3 from "../img/dashboard/testi3.png";
 
 const Dashboard = () => {
+  document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url('${background}')`;
   const containerRef = useRef(null);
-  document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url('${drawing1}')`;
+  const [galleryData, setGalleryData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/v1/atsgetartwork');
+        const data = response.data;
+        setGalleryData(data.artList);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
 
-  const cardData = [
-    {
-      image: require("../img/dashboard/art1.png"),
-      title: "Hopeless",
-      description: "Robin Hanson",
-    },
-    {
-      image: require("../img/dashboard/art2.png"),
-      title: "Unconfident",
-      description: "Connely Rod",
-    },
-    {
-      image: art3,
-      title: "Dry and Tears",
-      description: "Calvin Nera",
-    },
-  ];
+    fetchData();
+  }, []);
+
+  const processPhoto = (photo) => {
+    if (!photo) {
+      return ''; // handle undefined or null case
+    }
+
+    const delimiter = "karyaAsset/";
+    const basePath = 'http://localhost:5000/karya/';
+    const slicedPath = photo.substring(photo.indexOf(delimiter) + delimiter.length);
+    const fullPath = `${basePath}${slicedPath}`;
+    const fileURL = fullPath;
+    return fileURL;
+  };
+
 
   const tableData = [
     {
@@ -138,13 +145,13 @@ const Dashboard = () => {
             style={{ flexWrap: "nowrap" }}
             className="text-white text-center"
           >
-            {cardData.map((card, index) => (
+            {galleryData && galleryData.map((card, index) => (
               <Col style={{ Width: "16rem" }} key={index}>
                 <Card className="mb-4" style={{ width: "16rem" }}>
-                  <Card.Img variant="top" src={card.image} />
+                <Card.Img variant="top" src={processPhoto(card.image)} style={{ height: "300px" }} />
                   <Card.Body>
-                    <Card.Title style={{ fontSize: '22px' }}>{card.title}</Card.Title>
-                    <Card.Text style={{ fontSize: '16px' }}>{card.description}</Card.Text>
+                    <Card.Title style={{ fontSize: '22px' }}>{card.judul}</Card.Title>
+                    <Card.Text style={{ fontSize: '16px' }}>{card.artist}</Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
