@@ -26,11 +26,13 @@ function Profile() {
         if (response.data.success && response.data.user) {
           console.log("api", response.data.user.image);
           // setPhoto(response.data.user.image);
-          const delimiter = "/EastSide_Massive_Web_D";
-          const basePath = '../..';
+          const delimiter = "profileAsset/";
+          const basePath = 'http://localhost:5000/stat/';
           const slicedPath = response.data.user.image.substring(response.data.user.image.indexOf(delimiter) + delimiter.length);
-          const fullPath = basePath + slicedPath; 
-          console.log("api", fullPath);
+          const fullPath =  `${basePath}${slicedPath}`;
+          const fileURL = fullPath;
+          setPhoto(fileURL);
+          console.log("api",fullPath);
 
         } else {
           console.error("sad",response.data.message);
@@ -39,10 +41,10 @@ function Profile() {
         console.error("Error fetching user data:", error);
       }
     };
-    const img = require('../../img/asset/profileAsset/image_1702273774438_829.png');
-    setPhoto(img);
-    fetchUserById(); // Call the asynchronous function
-  }, []); // Ensure the dependency array is empty if you want it to run only once
+    // const img = require('../../img/asset/profileAsset/image_1702273774438_829.png');
+    // setPhoto(img);
+    fetchUserById();
+  }, []); 
   
 
 

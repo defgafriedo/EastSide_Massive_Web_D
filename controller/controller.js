@@ -4,7 +4,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
-
+const staticPath =path.join(__dirname, '..', 'src', 'img', 'asset' , 'profileAsset')
+// app.use('/img/artAssets', express.static(path.join(__dirname, '..', 'src', 'img', 'asset' , 'profileAsset')));
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "../src/img/asset/karyaAsset"));
@@ -21,7 +22,7 @@ const storage = multer.diskStorage({
 });
 const profile = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "../src/img/asset/profileAsset"));
+        cb(null, path.join("../src/img/asset/profileAsset"));
     },
     filename: function (req, file, cb) {
         const randomFileName =
@@ -237,4 +238,4 @@ const getUserById = async (req, res) => {
 
 
 
-module.exports = { getLogUser, addUser, addArtwork, addSellArtwork, getAllArtwork, updateUserData, getUserById, upload, uploadp }
+module.exports = { getLogUser, addUser, addArtwork, addSellArtwork, getAllArtwork, updateUserData, getUserById, staticPath, upload, uploadp }
