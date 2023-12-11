@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
 const staticPath =path.join(__dirname, '..', 'src', 'img', 'asset' , 'profileAsset')
+const karyaPath =path.join(__dirname, '..', 'src', 'img', 'asset' , 'karyaAsset')
 // app.use('/img/artAssets', express.static(path.join(__dirname, '..', 'src', 'img', 'asset' , 'profileAsset')));
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -110,10 +111,10 @@ const addArtwork = async (req, res) => {
         }
 
         const imagePath = req.file.path;
-
+        const imageP = imagePath.replace(/\\/g, "/");
         const sql = await query(
             'INSERT INTO art (id_user, nama, harga, kategori, jenis, tag, deskripsi, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [id_user, nama, 0, kategori, "lukisan", tag, deskripsi, imagePath]
+            [id_user, nama, 0, kategori, "lukisan", tag, deskripsi, imageP]
         );
 
         return res.status(200).json({ success: true, message: sql });
@@ -140,10 +141,10 @@ const addSellArtwork = async (req, res) => {
         }
 
         const imagePath = req.file.path;
-
+        const imageP = imagePath.replace(/\\/g, "/");
         const sql = await query(
             'INSERT INTO art (id_user, nama, harga, kategori, jenis, tag, deskripsi, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [id_user, nama, price, kategori, "lukisan", tag, deskripsi, imagePath]
+            [id_user, nama, price, kategori, "lukisan", tag, deskripsi, imageP]
         );
 
         return res.status(200).json({ success: true, message: sql });
@@ -236,6 +237,27 @@ const getUserById = async (req, res) => {
     }
 };
 
+const getListGallery = async (req, res) => {
+    try {
+        const sql = await query(`
+            SELECT * FROM art
+        `);
 
+        const artList = sql.map(item => ({
+            nama: item.nama,
+            deskripsi: item.deskripsi,
+            image: item.image
+        }));
 
-module.exports = { getLogUser, addUser, addArtwork, addSellArtwork, getAllArtwork, updateUserData, getUserById, staticPath, upload, uploadp }
+        return res.status(200).json({ success: true, data: artList });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({
+            message: 'Data tidak ditemukan',
+            error: error.message
+        });
+    }
+
+}
+
+module.exports = {getListGallery, getLogUser, addUser, addArtwork, addSellArtwork, getAllArtwork, updateUserData, getUserById, staticPath, upload, uploadp, karyaPath }

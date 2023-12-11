@@ -5,12 +5,15 @@ import {
   FormControl,
   Button,
   Container,
+  Image,
+
 } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../img/logo.png";
 import { FaSearch } from "react-icons/fa";
 import "./newNavbarStyle.css";
+import drawing2 from '../img/Drawing2.png'
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { Link, useNavigate } from "react-router-dom";
@@ -140,13 +143,59 @@ function NavBar() {
                 </Button>
               )}
               {isLoggedIn && (
-                <Button
-                  href="/profilegaleryartis"
-                  variant="primary"
-                  className="btn-login-custom"
+                <Dropdown
+                data-bs-theme="dark"
+                className="d-md-inline-block ms-md-auto"
+              >
+                <Dropdown.Toggle
+                  id="dropdown-button-dark-example1"
+                  variant="secondary"
+                  style={{
+                    border: "1px solid white",
+                    backgroundColor: "#0B0B0B",
+                  }}
                 >
-                {username}
-                </Button>
+                  Profile
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu className="dropdown-menu-end">
+                  <Dropdown.Item
+                    href="#/action-4"
+                    style={{ display: "flex" }}
+                  >
+                    <Image
+                      src={drawing2}
+                      style={{
+                        backgroundColor: "white",
+                        borderRadius: "50%",
+                        width: "40px",
+                        height: "40px",
+                      }}
+                    />
+                    <div
+                      style={{
+                        fontSize: "5px",
+                        display: "block",
+                        marginLeft: "2%",
+                      }}
+                    >
+                      <span style={{ display: "block" }}>
+                        {username}
+                      </span>
+                      <span style={{ display: "block" }}>
+                        {'defgafriedo@gmail.com'}
+                      </span>
+                    </div>
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item href="/user1">View profile</Dropdown.Item>
+                  <Dropdown.Item href="/">Setting</Dropdown.Item>
+                  <Dropdown.Item href="/order-list">
+                    Status Orderer
+                  </Dropdown.Item>
+                  <Dropdown.Item href="/login">Log out</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
 
 
               )}
