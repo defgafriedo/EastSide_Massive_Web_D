@@ -15,11 +15,11 @@ function Footer() {
             <img src={logo} alt="logo" />
           </div>
           {/* Column2 */}
-          <div className="col" style={{ display: "flex" }}>
-            <a href="#" style={{fontSize:'16px' }}>Contact&nbsp;Us</a>
-            <a href="./aboutus" style={{fontSize:'16px' }}>About&nbsp;Us</a>
-            <a href="#" style={{fontSize:'16px' }}>Support</a>
-            <a href="#" style={{fontSize:'16px' }}>Privacy&nbsp;Policy</a>
+          <div className="col" style={{ display: "flex", marginTop:'30px'}}>
+            <a href="#" style={{fontSize:'16px', marginRight:'50px' }}>Contact&nbsp;Us</a>
+            <a href="./aboutus" style={{fontSize:'16px', marginRight:'50px'  }}>About&nbsp;Us</a>
+            <a href="#" style={{fontSize:'16px', marginRight:'50px'  }}>Support</a>
+            <a href="#" style={{fontSize:'16px', marginRight:'50px'  }}>Privacy&nbsp;Policy</a>
           </div>
           {/* Column3 */}
           <div className="col" style={{ display: "flex" }}>

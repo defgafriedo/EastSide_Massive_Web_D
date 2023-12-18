@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Card, Table, Button } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import Dana from "../img/paymentLogo/Dana.png";
 import OVO from "../img/paymentLogo/OVO.png";
 import ShopeePay from "../img/paymentLogo/ShopeePay.png";
@@ -7,15 +7,21 @@ import BRI from "../img/paymentLogo/bankBRI.png";
 import BCA from "../img/paymentLogo/BankBCA.png";
 import "./paymentStyle.css";
 import Background3 from "../img/background3.png";
+import { useLocation } from 'react-router-dom';
 
 const Payment = () => {
   document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('${Background3}')`;
+  const location = useLocation();
+  const { shippingAddress, totalPrice, artworkPrice, shippingFee } = location.state || {};
+
   return (
     <Container>
       <Row>
         <Col className="payment my-3 mx-3">
           <div className="my-3 mx-3">
             <h5>Payment</h5>
+            {/* <p>Shipping Address: {shippingAddress}</p>
+            <p>Total Price: {totalPrice}</p> */}
             <div className="my-3">
               <input type="radio" id="Dana" name="paymentMethod" value="Dana" />
               <label htmlFor="Dana">
@@ -61,33 +67,62 @@ const Payment = () => {
           </div>
         </Col>
 
-        <Col md={4} className="my-3 mx-3">
-          <Card className="payment">
-            <Card.Body>
-              <Table borderless hover size="sm">
-                <tbody>
-                  <tr>
-                    <td className="text-start">Artwork Price</td>
-                    <td className="text-end">Rp.900.000,00</td>
-                  </tr>
-                  <tr>
-                    <td className="text-start">Shopping Fee</td>
-                    <td className="text-end">Rp.100.000,00</td>
-                  </tr>
-                  <tr>
-                    <td className="text-start">Total</td>
-                    <td className="text-end">Rp.1.000.000,00</td>
-                  </tr>
-                </tbody>
-              </Table>
-              <div className="d-grid gap-2">
-                <Button variant="primary">Check Out</Button>
-              </div>
-            </Card.Body>
-          </Card>
+        <Col className="my-3 ">
+          <Col
+            style={{
+              backgroundColor: "rgba(0, 0, 0, 0.50)",
+              borderRadius: "10px",
+              flexDirection: "column",
+            }}
+          >
+            <Col
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                color: "white",
+                width: "95%",
+                marginLeft: "2%",
+              }}
+            >
+              <p>Artwork Price</p>
+              <p>Rp.{artworkPrice}</p>
+            </Col>
+            <Col
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                color: "white",
+                width: "95%",
+                marginLeft: "2%",
+              }}
+            >
+              <p>Shipping Fee</p>
+              <p>Rp.{shippingFee}</p>
+            </Col>
+            <Col
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                color: "white",
+                width: "95%",
+                marginLeft: "2%",
+              }}
+            >
+              <p>Total</p>
+              <p>Rp.{totalPrice}</p>
+            </Col>
+            <Button
+              style={{
+                backgroundColor: "rgba(72, 90, 255, 0.65)",
+                width: "100%",
+              }}
+            >
+              Check Out
+            </Button>
+          </Col>
         </Col>
       </Row>
-    </Container>
+    </Container >
   );
 };
 

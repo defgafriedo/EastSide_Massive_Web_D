@@ -95,20 +95,20 @@ const InputJualKarya = () => {
   return (
     <>
       <Form style={{ backgroundColor: "rgba(255, 255, 255, 0)" }}>
-        <Container style={{ marginTop: "50px" }}>
-
-
-          <Row className="justify-content-md-center">
-
-            <Col md={3}>
+        <Container style={{ marginTop: "50px", marginBottom:'5rem'}}>
+          <Row>
+            <Col md={3} style={{ width: "45%" }}>
               <Nav variant="underline" defaultActiveKey="/home">
                 <Nav.Item>
-                  <Nav.Link href="/inputpostingkarya" style={{ color: "white" }}>
+                  <Nav.Link
+                    href="/inputpostingkarya"
+                    style={{ color: "white", fontSize: '20px' }}
+                  >
                     Post
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href="/inputjualkarya" style={{ color: "white" }}>
+                  <Nav.Link href="/inputjualkarya" style={{ color: "white", fontSize: '20px' }}>
                     Sell
                   </Nav.Link>
                 </Nav.Item>
@@ -122,10 +122,12 @@ const InputJualKarya = () => {
               </Nav>
               <Card
                 style={{
-                  width: "15rem",
-                  backgroundColor: "rgba(72,90,255,0.7)",
+                  width: "100%",
+                  height: "10%",
+                  backgroundColor: "rgba(72,90,255,0.50)",
                   fontSize: "10px",
                   marginTop: "10px",
+                  textAlign: "left",
                 }}
               >
                 <Card.Body>
@@ -139,7 +141,7 @@ const InputJualKarya = () => {
               </Card>
 
               <Row>
-              <Col style={{ marginTop: "10px" }} md={20}>
+                <Col style={{ marginTop: "10px" }} md={20}>
                   {fileURL ? (
                     <img
                       src={fileURL}
@@ -163,8 +165,9 @@ const InputJualKarya = () => {
               <Row>
                 <Card
                   style={{
-                    width: "18rem",
+                    width: "98%",
                     backgroundColor: "rgba(64,64,64,0.7)",
+                    textAlign: "left",
                   }}
                 >
                   <Card.Body>
@@ -193,8 +196,9 @@ const InputJualKarya = () => {
               <Row style={{ marginTop: "10px" }}>
                 <Card
                   style={{
-                    width: "18rem",
+                    width: "98%",
                     backgroundColor: "rgba(64,64,64,0.7)",
+                    textAlign: "left",
                   }}
                 >
                   <Card.Body>
@@ -224,7 +228,7 @@ const InputJualKarya = () => {
               <Row style={{ marginTop: "10px" }}>
                 <Card
                   style={{
-                    width: "18rem",
+                    width: "98%",
                     backgroundColor: "rgba(64,64,64,0.7)",
                   }}
                 >
@@ -253,8 +257,8 @@ const InputJualKarya = () => {
               </Row>
             </Col>
 
-            <Col md={5}>
-              <Nav variant="underline" defaultActiveKey="/home" style={{ backgroundColor: 'rgba(0, 0, 0, 0)', }}>
+            <Col md={5} style={{ width: "50%" }}>
+              <Nav variant="underline" defaultActiveKey="/home" style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}>
                 <Nav.Item>
                   <Nav.Link style={{ color: "rgba(0, 0, 0, 0)" }}>
                     Post
@@ -278,13 +282,16 @@ const InputJualKarya = () => {
                   <Col md={30}>
                     <Card
                       style={{
-                        width: "9rem",
-                        backgroundColor: "rgba(72,90,255,0.7)",
+                        width: "40%",
+                        height: "5%",
+                        backgroundColor: "rgba(72,90,255,0.50)",
                         fontSize: "10px",
+                        marginTop: "10px",
+                        textAlign: "left",
                       }}
                     >
                       <Card.Body>
-                        <Card.Title style={{ marginTop: "10px", color: "white" }}>
+                        <Card.Title style={{ color: "white" }}>
                           <Form.Label> Description</Form.Label>
                         </Card.Title>
                       </Card.Body>
@@ -310,13 +317,16 @@ const InputJualKarya = () => {
 
                     <Card
                       style={{
-                        width: "9rem",
-                        backgroundColor: "rgba(72,90,255,0.7)",
+                        width: "40%",
+                        height: "5%",
+                        backgroundColor: "rgba(72,90,255,0.50)",
                         fontSize: "10px",
+                        marginTop: "10px",
+                        textAlign: "left",
                       }}
                     >
                       <Card.Body>
-                        <Card.Title style={{ marginTop: "10px", color: "white" }}>
+                        <Card.Title style={{ color: "white" }}>
                           <Form.Label>Price</Form.Label>
                         </Card.Title>
                       </Card.Body>
@@ -335,18 +345,39 @@ const InputJualKarya = () => {
                           marginBottom: "10px",
                           backgroundColor: "rgba(0,0,0,0.7)",
                         }}
-                        value={formData.price}  // Assuming the price is stored in formData.price
+                        value={formData.price}
                         onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                       />
                     </FloatingLabel>
 
-
-                    <Button variant="primary" onClick={() => navigate("/")}>
-                      Cancel
-                    </Button>{" "}
-                    <Button variant="primary" onClick={handleSubmit}>
-                      Post
-                    </Button>{" "}
+                    <Col
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Button
+                        variant="primary"
+                        style={{
+                          width: "47%",
+                          backgroundColor: "rgba(72,90,255,0.50)",
+                        }}
+                        onClick={() => navigate("/")}
+                      >
+                        Cancel
+                      </Button>{" "}
+                      <Button
+                        variant="primary"
+                        style={{
+                          width: "47%",
+                          backgroundColor: "rgba(72,90,255,0.50)",
+                        }}
+                        onClick={handleSubmit}
+                      >
+                        Post
+                      </Button>{" "}
+                    </Col>
                   </Col>
                 </Col>
               </Row>

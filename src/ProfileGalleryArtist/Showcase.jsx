@@ -28,19 +28,33 @@ const Showcase = ({ itemShowcase }) => {
         <h1 className="d-flex justify-content-center">Showcase</h1>
         <Row>
           {itemShowcase.map((itemShowcase, index) => (
-            <Col
-              className="d-flex mx-4 my-4 justify-content-center"
-              key={index}
-            >
+            <Col className="d-flex mx-4 my-4 " key={index}>
               <Card className="card">
-                <Link to={itemShowcase.link}>
-                  <Card.Img variant="top" src={processPhoto(itemShowcase.image)} />
+                <Link to={`/detailshowcase?id_art=${itemShowcase.id}`}>
+                  <Card.Img
+                    variant="top"
+                    src={processPhoto(itemShowcase.image)}
+                    style={{ height: "300px", objectFit: "cover" }}
+                  />
                 </Link>
-                <Card.Body style={{ background: "rgba(43, 43, 43, 0.70)" }}>
+                <Card.Body
+                  style={{
+                    background: "rgba(43, 43, 43, 0.70)",
+                  }}
+                >
                   <Card.Title>{itemShowcase.nama} </Card.Title>
-                  <Card.Text>{itemShowcase.deskripsi}</Card.Text>
-                  <Link to={itemShowcase.link}>
-                  </Link>
+                  <Card.Text
+                    style={{
+                      maxHeight: '3em',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      textAlign: "justify"
+                    }}
+                  >
+                    {itemShowcase.deskripsi}
+                  </Card.Text>
+                  <Link to={itemShowcase.link}></Link>
                 </Card.Body>
               </Card>
             </Col>

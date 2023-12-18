@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -10,24 +10,22 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Nav from "react-bootstrap/Nav";
 import background from "../img/background1.png";
 import Card from "react-bootstrap/Card";
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const InputPostingKarya = () => {
   document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url('${background}')`;
 
   const navigate = useNavigate();
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    const storedUserId = localStorage.getItem('userId');
+    const storedToken = localStorage.getItem("token");
+    const storedUserId = localStorage.getItem("userId");
 
     if (storedToken && storedUserId) {
-
     } else {
       localStorage.clear();
-      navigate('/login');
+      navigate("/login");
     }
-
   }, [navigate]);
 
   const [formData, setFormData] = useState({
@@ -53,8 +51,6 @@ const InputPostingKarya = () => {
     }));
   };
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -79,7 +75,10 @@ const InputPostingKarya = () => {
     formDataObject.append("deskripsi", formData.description);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/v1/atsuploadartwork", formDataObject);
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/atsuploadartwork",
+        formDataObject
+      );
 
       if (response.ok) {
         console.log("Form data submitted successfully");
@@ -91,24 +90,25 @@ const InputPostingKarya = () => {
     }
   };
 
-
   return (
     <>
-      <Form style={{ backgroundColor: "rgba(255, 255, 255, 0)" }}>
-        <Container style={{ marginTop: "50px" }}>
-
-
-          <Row className="justify-content-md-center">
-
-            <Col md={3}>
+      <Form
+        style={{ backgroundColor: "rgba(255, 255, 255, 0)", width: "100%" }}
+      >
+        <Container style={{ marginTop: "50px", marginBottom:'5rem' }}>
+          <Row style={{ display: "flex" }}>
+            <Col md={3} style={{ width: "45%" }}>
               <Nav variant="underline" defaultActiveKey="/home">
                 <Nav.Item>
-                  <Nav.Link href="/inputpostingkarya" style={{ color: "white" }}>
+                  <Nav.Link
+                    href="/inputpostingkarya"
+                    style={{ color: "white", fontSize:'20px'}}
+                  >
                     Post
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href="/inputjualkarya" style={{ color: "white" }}>
+                  <Nav.Link href="/inputjualkarya" style={{ color: "white", fontSize:'20px' }}>
                     Sell
                   </Nav.Link>
                 </Nav.Item>
@@ -122,16 +122,17 @@ const InputPostingKarya = () => {
               </Nav>
               <Card
                 style={{
-                  width: "15rem",
-                  backgroundColor: "rgba(72,90,255,0.7)",
+                  width: "100%",
+                  height: "10%",
+                  backgroundColor: "rgba(72,90,255,0.50)",
                   fontSize: "10px",
                   marginTop: "10px",
+                  textAlign: "left",
                 }}
               >
                 <Card.Body>
                   <Card.Title>
                     <Form.Label style={{ color: "white" }}>
-                      {" "}
                       Artwok Posting
                     </Form.Label>
                   </Card.Title>
@@ -144,7 +145,11 @@ const InputPostingKarya = () => {
                     <img
                       src={fileURL}
                       alt="File Preview"
-                      style={{ width: "100%", maxHeight: "500px", marginTop: "10px" }}
+                      style={{
+                        width: "100%",
+                        maxHeight: "500px",
+                        marginTop: "10px",
+                      }}
                     />
                   ) : (
                     <>
@@ -152,7 +157,6 @@ const InputPostingKarya = () => {
                         {" "}
                         Input Gambar
                       </Form.Label>
-
                     </>
                   )}
                   <Form.Group controlId="formFile" className="mb-3">
@@ -163,8 +167,9 @@ const InputPostingKarya = () => {
               <Row>
                 <Card
                   style={{
-                    width: "18rem",
+                    width: "98%",
                     backgroundColor: "rgba(64,64,64,0.7)",
+                    textAlign: "left",
                   }}
                 >
                   <Card.Body>
@@ -183,7 +188,12 @@ const InputPostingKarya = () => {
                           color: "white",
                         }}
                         value={formData.artworkTheme}
-                        onChange={(e) => setFormData({ ...formData, artworkTheme: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            artworkTheme: e.target.value,
+                          })
+                        }
                       />
                     </Col>
                   </Card.Body>
@@ -193,8 +203,9 @@ const InputPostingKarya = () => {
               <Row style={{ marginTop: "10px" }}>
                 <Card
                   style={{
-                    width: "18rem",
+                    width: "98%",
                     backgroundColor: "rgba(64,64,64,0.7)",
+                    textAlign: "left",
                   }}
                 >
                   <Card.Body>
@@ -213,18 +224,22 @@ const InputPostingKarya = () => {
                           color: "white",
                         }}
                         value={formData.artworkTitle}
-                        onChange={(e) => setFormData({ ...formData, artworkTitle: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            artworkTitle: e.target.value,
+                          })
+                        }
                       />
                     </Col>
                   </Card.Body>
-
                 </Card>
               </Row>
 
               <Row style={{ marginTop: "10px" }}>
                 <Card
                   style={{
-                    width: "18rem",
+                    width: "98%",
                     backgroundColor: "rgba(64,64,64,0.7)",
                   }}
                 >
@@ -238,23 +253,34 @@ const InputPostingKarya = () => {
                     <hr />
                     <DropdownButton
                       id="dropdown-basic-button"
-                      title={formData.artworkType || "Select Artwork Type"}  // Use formData.artworkType as the default title
+                      title={formData.artworkType || "Select Artwork Type"} // Use formData.artworkType as the default title
                     >
-                      <Dropdown.Item onClick={() => setFormData({ ...formData, artworkType: "Painting" })}>
+                      <Dropdown.Item
+                        onClick={() =>
+                          setFormData({ ...formData, artworkType: "Painting" })
+                        }
+                      >
                         Painting
                       </Dropdown.Item>
-                      <Dropdown.Item onClick={() => setFormData({ ...formData, artworkType: "Statue" })}>
+                      <Dropdown.Item
+                        onClick={() =>
+                          setFormData({ ...formData, artworkType: "Statue" })
+                        }
+                      >
                         Statue
                       </Dropdown.Item>
                     </DropdownButton>
-
                   </Card.Body>
                 </Card>
               </Row>
             </Col>
 
-            <Col md={5}>
-              <Nav variant="underline" defaultActiveKey="/home" style={{ backgroundColor: 'rgba(0, 0, 0, 0)', }}>
+            <Col md={5} style={{ width: "50%" }}>
+              <Nav
+                variant="underline"
+                defaultActiveKey="/home"
+                style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}
+              >
                 <Nav.Item>
                   <Nav.Link style={{ color: "rgba(0, 0, 0, 0)" }}>
                     Post
@@ -278,13 +304,16 @@ const InputPostingKarya = () => {
                   <Col md={30}>
                     <Card
                       style={{
-                        width: "9rem",
-                        backgroundColor: "rgba(72,90,255,0.7)",
+                        width: "40%",
+                        height: "5%",
+                        backgroundColor: "rgba(72,90,255,0.50)",
                         fontSize: "10px",
+                        marginTop: "10px",
+                        textAlign: "left",
                       }}
                     >
                       <Card.Body>
-                        <Card.Title style={{ marginTop: "10px", color: "white" }}>
+                        <Card.Title style={{ color: "white" }}>
                           <Form.Label> Description</Form.Label>
                         </Card.Title>
                       </Card.Body>
@@ -292,7 +321,11 @@ const InputPostingKarya = () => {
                     <FloatingLabel
                       controlId="floatingTextarea2"
                       label="Add Description Here"
-                      style={{ marginTop: "10px", color: "white", marginBottom: "10px", }}
+                      style={{
+                        marginTop: "10px",
+                        color: "white",
+                        marginBottom: "10px",
+                      }}
                     >
                       <Form.Control
                         as="textarea"
@@ -304,22 +337,47 @@ const InputPostingKarya = () => {
                           backgroundColor: "rgba(0,0,0,0.7)",
                         }}
                         value={formData.description}
-                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            description: e.target.value,
+                          })
+                        }
                       />
                     </FloatingLabel>
-
-                    <Button variant="primary" onClick={() => navigate("/")}>
-                      Cancel
-                    </Button>{" "}
-                    <Button variant="primary" onClick={handleSubmit}>
-                      Post
-                    </Button>{" "}
+                    <Col
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        width: "100%",
+                      }}
+                    >
+                      <Button
+                        variant="primary"
+                        style={{
+                          width: "47%",
+                          backgroundColor: "rgba(72,90,255,0.50)",
+                        }}
+                        onClick={() => navigate("/")}
+                      >
+                        Cancel
+                      </Button>{" "}
+                      <Button
+                        variant="primary"
+                        style={{
+                          width: "47%",
+                          backgroundColor: "rgba(72,90,255,0.50)",
+                        }}
+                        onClick={handleSubmit}
+                      >
+                        Post
+                      </Button>{" "}
+                    </Col>
                   </Col>
                 </Col>
               </Row>
             </Col>
           </Row>
-
         </Container>
       </Form>
     </>

@@ -2,15 +2,13 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "./components/newNavbar";
 import Login from "./loginSignup/Login-Signup-Page";
-import DashBoard from "./dashboard/dashboard";
-import DashboardPainting from "./dashboardPainting/dashboardPainting";
-import DashboardStatue from "./dashboardStatue/dashboardStatue";
 import AboutUs from "./aboutUs/aboutUs";
 import ListProfileGallery from "./listProfileGallery/listProfileGallery";
 import OrderList from "./orderList/orderList";
 import Payment from "./payment/payment";
-import OrderDetail from "./orderDetail/orderDetail";
-import DetailShowcase from "./detailShowcase/detailShowcase";
+import OrderDetail from "./OrderDetail/OrderDetail";
+import DetailShowcase from "./DetailArt/DetailShowcase";
+import DetailForSale from "./DetailArt/DetailForSale";
 import Dashboard from "./dashboard/dashboard";
 import DetailPemesanan from "./detailPemesanan/detailPemesanan";
 import InputJualKarya from "./inputJualKarya/inputJualKarya";
@@ -54,15 +52,14 @@ function App() {
                 <NavBar />
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
-                  <Route path="/dashboard" element={<DashBoard />} />
-                  <Route path="/dashboardpainting" element={<DashboardPainting />} />
-                  <Route path="/dashboardstatue" element={<DashboardStatue />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/aboutus" element={<AboutUs />} />
                   <Route path="/list-profile-gallery" element={<ListProfileGallery />}/>
                   <Route path="/order-list" element={<OrderList />} />
                   <Route path="/payment" element={<Payment />} />
                   <Route path="/order-detail" element={<OrderDetail />} />
                   <Route path="/detailshowcase" element={<DetailShowcase />} />
+                  <Route path="/detailforsale" element={<DetailForSale />} />
                   <Route path="/inputpostingkarya" element={<InputPostingKarya></InputPostingKarya>}/>
                   <Route path="/inputjualkarya" element={<InputJualKarya></InputJualKarya>}/>
                   <Route path="/detailpemesanan" element={<DetailPemesanan></DetailPemesanan>}/>

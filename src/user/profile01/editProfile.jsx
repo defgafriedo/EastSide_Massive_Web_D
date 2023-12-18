@@ -4,15 +4,13 @@ import React, { useState } from "react";
 import Background from "../../img/profile/background2.png";
 import Photo from "../../img/profile/contoh.png";
 import "../profileStyle.css";
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Editprofile() {
   document.body.style.backgroundImage = ` url('${Background}')`;
   document.body.style.backgroundSize = "cover";
   const navigate = useNavigate();
-
-
 
   const storedUserId = localStorage.getItem("userId");
   const [file, setFile] = useState(null);
@@ -30,8 +28,6 @@ function Editprofile() {
       image: selectedFile,
     }));
   };
-
-
 
   const [kategoriArtist] = useState([
     "Statue",
@@ -57,12 +53,10 @@ function Editprofile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     if (!file) {
       console.log("Please select an image.");
       return;
     }
-
 
     const randomImageName = `image_${Date.now()}_${Math.floor(
       Math.random() * 1000
@@ -77,12 +71,14 @@ function Editprofile() {
     formDataObject.append("deskripsi", formData.deskripsi);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/v1/atsupdateuser", formDataObject);
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/atsupdateuser",
+        formDataObject
+      );
 
       if (response.success) {
-        navigate('/user1')
+        navigate("/user1");
         console.log("Form data submitted successfully");
-
       } else {
         console.error("Failed to submit form data");
       }
@@ -119,7 +115,7 @@ function Editprofile() {
         style={{
           backgroundColor: "#292929",
           width: "200px",
-          height: "300px",
+          height: "400px",
           borderRadius: "5px",
           marginLeft: "20px",
         }}
@@ -141,10 +137,8 @@ function Editprofile() {
                     style={{ backgroundColor: "white" }}
                     roundedCircle
                   />
-
                 </>
               )}
-
 
               <h5 className="mt-2" style={{ color: "white" }}>
                 Nickname
@@ -189,7 +183,6 @@ function Editprofile() {
               display: "flex",
               justifyContent: "flex-start",
               alignItems: "flex-start",
-
             }}
           >
             <h2
@@ -202,7 +195,6 @@ function Editprofile() {
               Account Settings
             </h2>
 
-
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label
                 style={{
@@ -213,7 +205,11 @@ function Editprofile() {
               >
                 Profile
               </Form.Label>
-              <Form.Control type="file" onChange={handleFileChange} style={{ background: "#292929", color: "white" }} />
+              <Form.Control
+                type="file"
+                onChange={handleFileChange}
+                style={{ background: "#292929", color: "white" }}
+              />
             </Form.Group>
 
             <Form.Group controlId="nama">
@@ -233,6 +229,10 @@ function Editprofile() {
                 onChange={handleChange}
                 required
                 className="form-isi"
+                style={{
+                  color: "white",
+                  backgroundColor: formData.nama ? "black" : "transparent",
+                }}
               />
             </Form.Group>
 
@@ -254,6 +254,10 @@ function Editprofile() {
                 onChange={handleChange}
                 required
                 className="form-isi"
+                style={{
+                  color: "white",
+                  backgroundColor: formData.nama ? "black" : "transparent",
+                }}
               />
             </Form.Group>
             <Form.Group controlId="alamat">
@@ -273,6 +277,10 @@ function Editprofile() {
                 onChange={handleChange}
                 required
                 className="form-isi"
+                style={{
+                  color: "white",
+                  backgroundColor: formData.nama ? "black" : "transparent",
+                }}
               />
             </Form.Group>
             <Form.Group controlId="tagline">
@@ -291,6 +299,10 @@ function Editprofile() {
                 value={formData.tagline}
                 onChange={handleChange}
                 className="form-isi"
+                style={{
+                  color: "white",
+                  backgroundColor: formData.nama ? "black" : "transparent",
+                }}
               />
             </Form.Group>
             <Form.Group controlId="description">
@@ -310,6 +322,11 @@ function Editprofile() {
                 value={formData.deskripsi}
                 onChange={handleChange}
                 className="form-isi"
+                style={{
+                  color: "white",
+                  width: "100%",
+                  backgroundColor: formData.nama ? "black" : "transparent",
+                }}
               />
             </Form.Group>
 
@@ -318,10 +335,10 @@ function Editprofile() {
               type="submit"
               className="mt-4 button-save-profile"
               style={{
-                marginLeft: "70%",
+                marginLeft: "85%",
                 fontSize: "12px",
-                width: "31%",
-                height: "10%",
+                width: "25%",
+                height: "5%",
                 border: "none",
               }}
             >

@@ -4,51 +4,72 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import BackgroundProfileGallery from "../img/backgroundProfileGallery.png";
 import PhotoProfileArtist from "../img/ProfileGalleryArtist/photoProfileArtist.png";
-import drawing1 from "../img/listProfileGallery/Drawing1.png";
-import drawing2 from "../img/ProfileGalleryArtist/Drawing2.png";
-import drawing3 from "../img/ProfileGalleryArtist/Drawing3.png";
 import BackgroundShowcase from "../img/background2.png";
 import { FaPlus } from "react-icons/fa";
 import Showcase from "./Showcase";
 import ForSale from "./ForSale";
-import axios from 'axios';
-
+import axios from "axios";
 
 const ProfileGalleryArtist = () => {
   document.body.style.backgroundImage = `url('${BackgroundProfileGallery}')`;
   document.body.style.backgroundColor = "black";
   document.body.style.backgroundRepeat = "no-repeat";
-
+  const id_user = localStorage.getItem("userId");
   const [itemShowcase, setItemShowcase] = useState([]);
   const [itemForSale, setItemForSale] = useState([]);
+  const [galleryArtist, setGalleryArtist] = useState([])
+  const [photo, setPhoto] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const response = await axios.get(`http://localhost:5000/api/v1/atsgetuser?id_user=${id_user}`)
+        const dataUser = response.data;
+        setGalleryArtist(dataUser.user);
+
         if (itemShowcase) {
-          const response = await axios.get('http://localhost:5000/api/v1/atsShowcaseProfile');
+          const response = await axios.get(
+            `http://localhost:5000/api/v1/atsShowcaseProfile?id_user=${id_user}`
+          );
           const data = response.data;
           setItemShowcase(data.data);
         }
         if (itemForSale) {
-          const response = await axios.get('http://localhost:5000/api/v1/atsSaleProfile');
+          const response = await axios.get(
+            `http://localhost:5000/api/v1/atsSaleProfile?id_user=${id_user}`
+          );
           const data = response.data;
           setItemForSale(data.data);
         }
 
+        if (response.data.user) {
+          const delimiter = "profileAsset/";
+          const basePath = "http://localhost:5000/stat/";
+          const slicedPath = response.data.user.image.substring(
+            response.data.user.image.indexOf(delimiter) + delimiter.length
+          );
+          const fullPath = `${basePath}${slicedPath}`;
+          const fileURL = fullPath;
+          setPhoto(fileURL);
+        } else {
+          console.error("sad", response.data.message);
+        }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, []);
 
+
+
+
+
   return (
     <>
       <div
         style={{
-          backgroundImage: `url('${BackgroundProfileGallery}')`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           minHeight: "100vh",
@@ -60,19 +81,18 @@ const ProfileGalleryArtist = () => {
           className="position-absolute bottom-0"
           style={{ marginTop: "50px" }}
         >
+
           <div className="mx-5">
-            <Link to="/user1">
               <img
-                src={PhotoProfileArtist}
+                src={photo}
                 alt="Photo Profile Artist"
-                style={{ maxHeight: "100%", width: "auto" }}
+                style={{ height:'6rem', width: "12rem" }}
               />
-            </Link>
           </div>
           <div className="mx-5 my-3">
             <Row className="d-flex align-items-center">
               <Col xs="auto">
-                <h3>Jidan bjirr</h3>
+                <h3>{galleryArtist.nama}</h3>
               </Col>
               <Col xs="auto">
                 <div
@@ -86,7 +106,7 @@ const ProfileGalleryArtist = () => {
                 <FaInstagram style={{ fontSize: "25px" }} />
               </Col>
             </Row>
-            <h5>Stoick</h5>
+            <h5>{galleryArtist.tagline}</h5>
           </div>
         </Container>
       </div>
@@ -102,24 +122,24 @@ const ProfileGalleryArtist = () => {
       >
         <Container className="py-5 my-4">
           <div className="d-flex justify-content-end my-4 mx-3">
-            <button
-              variant="secondary"
-              className="d-flex align-items-center justify-content-center"
-              style={{
-                fontSize: "20px",
-                borderRadius: "50%",
-                width: "40px",
-                height: "40px",
-              }}
-            >
-              <Link to="/inputpostingkarya">
+            <Link to="/inputpostingkarya">
+              <button
+                variant="secondary"
+                className="d-flex align-items-center justify-content-center"
+                style={{
+                  fontSize: "20px",
+                  borderRadius: "50%",
+                  width: "40px",
+                  height: "40px",
+                }}
+              >
                 <FaPlus />
-              </Link>
-            </button>
+              </button>
+            </Link>
           </div>
           <Showcase itemShowcase={itemShowcase} />
-        </Container>
-      </div>
+        </Container >
+      </div >
 
       <div style={{ background: "#000", backgroundSize: "cover" }}>
         <Container className="my-5">

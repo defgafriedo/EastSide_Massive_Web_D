@@ -234,9 +234,37 @@ const getUserById = async (req, res) => {
     } catch (error) {
         console.error(error);
 
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "Failed to fetch user data. Server error.",
+            error: error.message,
+        });
+    }
+};
+
+const getArtById = async (req, res) => {
+    const { id_art } = req.query;
+
+    try {
+        const sql = await query('SELECT art.*, user.nama AS artist_name, user.image AS user_image FROM art INNER JOIN user ON art.id_user = user.id WHERE art.id = ?', [id_art]);
+
+        if (sql.length === 0) {
+            console.log('Art not found');
+            return res.status(404).json({
+                success: false,
+                message: "Art not found",
+            });
+        }
+
+        const art = sql[0];
+        console.log('Sending art details:', art);
+        return res.status(200).json({ success: true, art });
+    } catch (error) {
+        console.error('Error fetching art data:', error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Failed to fetch art data. Server error.",
             error: error.message,
         });
     }
@@ -283,11 +311,12 @@ const getListProfileSeniman = async (req, res) => {
 }
 
 const getShowcaseProfile = async (req, res) => {
+    const { id_user } = req.query;
     try {
         const sql = await query(`
         SELECT * FROM art
-        WHERE jenis = 'showcase'
-        `);
+        WHERE jenis = 'showcase' and id_user=?
+      `, id_user);
 
         return res.status(200).json({ success: true, data: sql });
     } catch (error) {
@@ -299,11 +328,12 @@ const getShowcaseProfile = async (req, res) => {
     }
 }
 const getSaleProfile = async (req, res) => {
+    const { id_user } = req.query;
     try {
         const sql = await query(`
         SELECT * FROM art
-        WHERE jenis = 'sale'
-        `);
+        WHERE jenis = 'sale' and id_user=?
+      `, id_user);
 
         return res.status(200).json({ success: true, data: sql });
     } catch (error) {
@@ -314,6 +344,7 @@ const getSaleProfile = async (req, res) => {
         });
     }
 }
+
 const getShowOrder = async (req, res) => {
     try {
         const { id_pembeli } = req.params;
@@ -336,4 +367,4 @@ const getShowOrder = async (req, res) => {
     }
 };
 
-module.exports = { getShowOrder, getShowcaseProfile, getSaleProfile, getListProfileSeniman, getListGallery, getLogUser, addUser, addArtwork, addSellArtwork, getAllArtwork, updateUserData, getUserById, staticPath, upload, uploadp, karyaPath }
+module.exports = { getArtById, getShowOrder, getShowcaseProfile, getSaleProfile, getListProfileSeniman, getListGallery, getLogUser, addUser, addArtwork, addSellArtwork, getAllArtwork, updateUserData, getUserById, staticPath, upload, uploadp, karyaPath }

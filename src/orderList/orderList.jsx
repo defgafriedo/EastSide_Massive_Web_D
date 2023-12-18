@@ -68,11 +68,6 @@ const OrderList = ({ idPembeli }) => {
               <Row className="mx-3 mt-5">
                 <Col className="d-grid gap-2 my-1">
                   <Button variant="secondary" href="/order-detail">
-                    Detail
-                  </Button>
-                </Col>
-                <Col className="d-grid gap-2 my-1">
-                  <Button variant="secondary" href="/order-detail">
                     Report
                   </Button>
                 </Col>

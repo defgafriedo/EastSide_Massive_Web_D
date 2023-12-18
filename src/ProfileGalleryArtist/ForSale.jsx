@@ -24,7 +24,7 @@ const ForSale = ({ itemForSale }) => {
           <Button
             variant="link"
             style={{ textDecoration: "none", color: "inherit" }}
-            onClick={() => {}}
+            onClick={() => { }}
           >
             View More
           </Button>
@@ -33,11 +33,23 @@ const ForSale = ({ itemForSale }) => {
           {itemForSale.map((itemForSale) => (
             <Col className="d-flex mx-4 my-4 justify-content-center">
               <Card className="card">
-                <Link to={itemForSale.link}>
-                  <Card.Img variant="top" src={processPhoto(itemForSale.image)} />
+                <Link to={`/detailforsale?id_art=${itemForSale.id}`}>
+                  <Card.Img variant="top" src={processPhoto(itemForSale.image)} style={{ height: "300px", objectFit: "cover" }} />
                   <Card.Body style={{ background: "rgba(43, 43, 43, 0.70)" }}>
-                    <Card.Title>{itemForSale.nama}</Card.Title>
+                    <Card.Title style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{itemForSale.nama}</Card.Title>
                     <Card.Text>{itemForSale.harga}</Card.Text>
+                    <div style={{ display: 'flex' }}>
+                      <Link to={`/detailforsale?id_art=${itemForSale.id}`} className="mx-2">
+                        <Button variant="outline-light" style={{ width: '100%' }}>
+                          Detail
+                        </Button>
+                      </Link>
+                      <Link to={`/order-detail?id_art=${itemForSale.id}`} style={{ flex: 1 }} className="mx-2">
+                        <Button variant="outline-primary" style={{ width: '100%' }}>
+                          Buy
+                        </Button>
+                      </Link>
+                    </div>
                   </Card.Body>
                 </Link>
               </Card>

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Card, Row, Col, Container } from "react-bootstrap";
-import drawing1 from "../img/listProfileGallery/Drawing1.png";
-import drawing2 from "../img/listProfileGallery/Drawing2.png";
-import drawing3 from "../img/listProfileGallery/Drawing3.png";
 import "./listProfileGalleryStyle.css";
 import Background3 from "../img/background3.png";
 import axios from 'axios';
@@ -46,10 +43,23 @@ function ListProfileGallery() {
           {galleryData.map((art, index) => (
             <Col className="mx-4 my-4" key={index}>
               <Card className="card">
-                <Card.Img variant="top" src={processPhoto(art.image)} />
+              <Card.Img
+                      variant="top"
+                      src={processPhoto(art.image)}
+                      style={{ height: "350px", objectFit: "cover" }}
+                    />  
                 <Card.Body>
                   <Card.Title>{art.nama}</Card.Title>
-                  <Card.Text>{art.deskripsi}</Card.Text>
+                  <Card.Text
+                  style={{
+                    maxHeight: '6rem',
+                    maxHeigh: '100%',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}
+                >
+                  {art.deskripsi}
+                </Card.Text>
                 </Card.Body>
               </Card>
             </Col>

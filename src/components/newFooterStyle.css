@@ -10,12 +10,10 @@
 .col a {
   color: white;
   text-decoration: none;
-  margin-top: 30px;
   width: 100%;
   align-items: center;
   transition: color 0.3s ease;
   justify-content: space-between;
-  margin-right: 50px;
 }
 
 .col a:hover {

@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const {getShowOrder, getSaleProfile, getShowcaseProfile, addUser, getLogUser, addArtwork,addSellArtwork, getAllArtwork,updateUserData,getUserById,staticPath, upload,uploadp, getListGallery, getListProfileSeniman} = require('../controller/controller')
+const {getArtById, getShowOrder, getSaleProfile, getShowcaseProfile, addUser, getLogUser, addArtwork,addSellArtwork, getAllArtwork,updateUserData,getUserById,staticPath, upload,uploadp, getListGallery, getListProfileSeniman} = require('../controller/controller')
 
 app.post ('/atslog', getLogUser)
 app.post ('/atssign', addUser)
@@ -16,5 +16,5 @@ app.get('/atsListProfileSeniman', getListProfileSeniman);
 app.get('/atsShowcaseProfile', getShowcaseProfile);
 app.get('/atsSaleProfile', getSaleProfile);
 app.get('/atsShowOrder/:id_pembeli', getShowOrder);
-
+app.get('/atsDetailArt', getArtById);
 module.exports=app

@@ -1,8 +1,8 @@
-import React, { useRef, useState,useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Card, Row, Col, Container, Table, Button } from "react-bootstrap";
 import "./dashboard.css";
 import background from "../img/background1.png";
-import axios from 'axios';
+import axios from "axios";
 import top1 from "../img/dashboard/top1.png";
 import top2 from "../img/dashboard/top2.png";
 import top3 from "../img/dashboard/top3.png";
@@ -17,7 +17,9 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/v1/atsgetartwork');
+        const response = await axios.get(
+          "http://localhost:5000/api/v1/atsgetartwork"
+        );
         const data = response.data;
         setGalleryData(data.artList);
       } catch (error) {
@@ -30,17 +32,18 @@ const Dashboard = () => {
 
   const processPhoto = (photo) => {
     if (!photo) {
-      return ''; // handle undefined or null case
+      return ""; // handle undefined or null case
     }
 
     const delimiter = "karyaAsset/";
-    const basePath = 'http://localhost:5000/karya/';
-    const slicedPath = photo.substring(photo.indexOf(delimiter) + delimiter.length);
+    const basePath = "http://localhost:5000/karya/";
+    const slicedPath = photo.substring(
+      photo.indexOf(delimiter) + delimiter.length
+    );
     const fullPath = `${basePath}${slicedPath}`;
     const fileURL = fullPath;
     return fileURL;
   };
-
 
   const tableData = [
     {
@@ -95,9 +98,8 @@ const Dashboard = () => {
     },
   ];
 
-
   return (
-    <div>
+    <div >
       <Container>
         <style>
           {`
@@ -116,7 +118,6 @@ const Dashboard = () => {
             variant="outline-black"
             className="navbar-btn"
             href="/dashboardpainting"
-
           >
             Painting
           </Button>
@@ -145,17 +146,22 @@ const Dashboard = () => {
             style={{ flexWrap: "nowrap" }}
             className="text-white text-center"
           >
-            {galleryData && galleryData.map((card, index) => (
-              <Col style={{ Width: "16rem" }} key={index}>
-                <Card className="mb-4" style={{ width: "16rem" }}>
-                <Card.Img variant="top" src={processPhoto(card.image)} style={{ height: "300px" }} />
-                  <Card.Body>
-                    <Card.Title style={{ fontSize: '22px' }}>{card.judul}</Card.Title>
-                    <Card.Text style={{ fontSize: '16px' }}>{card.artist}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
+            {galleryData &&
+              galleryData.map((card, index) => (
+                <Col md="auto" style={{ Width: "16rem" }} key={index}>
+                  <Card className="mb-4" style={{ width: "16rem" }}>
+                    <Card.Img
+                      variant="top"
+                      src={processPhoto(card.image)}
+                      style={{ height: "300px", objectFit: "cover" }}
+                    />
+                    <Card.Body>
+                      <Card.Title>{card.judul}</Card.Title>
+                      <Card.Text>{card.artist}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
           </Row>
         </div>
         <Row
@@ -168,27 +174,27 @@ const Dashboard = () => {
 
           <Col md="auto" style={{ marginRight: "4rem" }} className="top-art-1">
             <Card style={{ width: "16rem" }}>
-              <Card.Img variant="top" src={top1} />
+              <Card.Img variant="top" src={top1} style={{ height: "350px", objectFit: "cover" }}/>
               <Card.Body>
-                <Card.Title>Fall Apart by Jidan Bjir</Card.Title>
+                <Card.Title>Fall Apart by Jidan</Card.Title>
                 <Card.Text>Price: Rp 25.000.000,00</Card.Text>
               </Card.Body>
             </Card>
           </Col>
           <Col md="auto" className="top-art-2">
             <Card className="mb-5 mt-5" style={{ width: "16rem" }}>
-              <Card.Img variant="top" src={top2} />
+              <Card.Img variant="top" src={top2} style={{ height: "350px", objectFit: "cover" }}/>
               <Card.Body>
-                <Card.Title>Lies by Jidan Bjir</Card.Title>
+                <Card.Title>Lies by Jidan</Card.Title>
                 <Card.Text>Price: Rp 25.000.000,00</Card.Text>
               </Card.Body>
             </Card>
           </Col>
           <Col md="auto" style={{ marginLeft: "4rem" }} className="top-art-3">
             <Card style={{ width: "16rem" }}>
-              <Card.Img variant="top" src={top3} />
+              <Card.Img variant="top" src={top3} style={{ height: "350px", objectFit: "cover" }}/>
               <Card.Body>
-                <Card.Title>Blood Tsuki by Jidan Bjir</Card.Title>
+                <Card.Title>Blood Tsuki by Jidan</Card.Title>
                 <Card.Text>Price: Rp 25.000.000,00</Card.Text>
               </Card.Body>
             </Card>
@@ -200,7 +206,11 @@ const Dashboard = () => {
               <Button variant="outline-black" className="navbar-artist">
                 Trending
               </Button>
-              <Button variant="outline-black" className="navbar-artist">
+              <Button
+                variant="outline-black"
+                className="navbar-artist"
+                style={{ marginLeft: "2%" }}
+              >
                 Top
               </Button>
             </Container>

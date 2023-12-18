@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import Background from "../../img/profile/background2.png";
 import Test from "../../img/profile/yato.jpg";
 import "../profileStyle.css";
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Profile() {
   document.body.style.backgroundImage = ` url('${Background}')`;
@@ -17,26 +17,30 @@ function Profile() {
   useEffect(() => {
     const fetchUserById = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/v1/atsgetuser", {
-          params: {
-            id_user: storedUserId
+        const response = await axios.get(
+          "http://localhost:5000/api/v1/atsgetuser",
+          {
+            params: {
+              id_user: storedUserId,
+            },
           }
-        });
-  
+        );
+
         if (response.data.success && response.data.user) {
           console.log("api", response.data.user.image);
           // setPhoto(response.data.user.image);
           const delimiter = "profileAsset/";
-          const basePath = 'http://localhost:5000/stat/';
-          const slicedPath = response.data.user.image.substring(response.data.user.image.indexOf(delimiter) + delimiter.length);
-          const fullPath =  `${basePath}${slicedPath}`;
+          const basePath = "http://localhost:5000/stat/";
+          const slicedPath = response.data.user.image.substring(
+            response.data.user.image.indexOf(delimiter) + delimiter.length
+          );
+          const fullPath = `${basePath}${slicedPath}`;
           const fileURL = fullPath;
           setPhoto(fileURL);
           setName(response.data.user.nama);
-          console.log("api",fullPath);
-
+          console.log("api", fullPath);
         } else {
-          console.error("sad",response.data.message);
+          console.error("sad", response.data.message);
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -45,10 +49,7 @@ function Profile() {
     // const img = require('../../img/asset/profileAsset/image_1702273774438_829.png');
     // setPhoto(img);
     fetchUserById();
-  }, []); 
-  
-
-
+  }, []);
 
   const [images] = useState([Test, Test, Test, Test, Test]);
   const [kategoriArtist] = useState([
@@ -94,7 +95,7 @@ function Profile() {
         style={{
           backgroundColor: "#292929",
           width: "200px",
-          height: "300px",
+          height: "400px",
           borderRadius: "5px",
           marginLeft: "20px",
         }}
@@ -102,13 +103,25 @@ function Profile() {
         <Col>
           <Col className="d-flex justify-content-center">
             <Col xs={8} className="p-2 text-center mt-2">
-              <Image
-                src={photo}
-                alt="user"
-                style={{ backgroundColor: "white" }}
-                roundedCircle
-              />
-              
+              <div
+                style={{
+                  width: "100px",
+                  height: "100px",
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  backgroundColor: "white",
+                }}
+              >
+                <Image
+                  src={photo}
+                  style={{
+                    backgroundColor: "white",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
 
               <h5 className="mt-2" style={{ color: "white" }}>
                 {name}
