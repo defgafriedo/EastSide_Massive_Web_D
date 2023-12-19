@@ -502,7 +502,27 @@ const getShowOrder = async (req, res) => {
     }
 };
 
+const getShowAllOrder = async (req, res) => {
+    try {
+        const { id_pembeli } = req.params;
+
+        const sql = await query(`
+        SELECT transaksi.*, art.*, user.nama AS nama_pembeli
+        FROM transaksi
+        INNER JOIN art ON transaksi.id_art = art.id
+        INNER JOIN user ON art.id_user = user.id
+        `, [id_pembeli]);
+        return res.status(200).json({ success: true, message: sql });
+    } catch (error) {
+        console.error(error);
+
+        res.status(400).json({
+            message: 'Gagal mendapatkan data transaksi. Terjadi kesalahan pada server.',
+            error: error.message,
+        });
+    }
+};
 
 
 
-module.exports = { getArtById,getArtworkById,updateUserLevel,deleteUser,addTransaction, getAllUsers,getShowOrder, getShowcaseProfile, getSaleProfile, getListProfileSeniman, getListGallery, getLogUser, addUser, addArtwork, addSellArtwork,getAllAvgArt, getAllArtwork, updateUserData, getUserById, staticPath, upload, uploadp, karyaPath }
+module.exports = { getArtById,getArtworkById,updateUserLevel,deleteUser,addTransaction, getShowAllOrder,getAllUsers,getShowOrder, getShowcaseProfile, getSaleProfile, getListProfileSeniman, getListGallery, getLogUser, addUser, addArtwork, addSellArtwork,getAllAvgArt, getAllArtwork, updateUserData, getUserById, staticPath, upload, uploadp, karyaPath }

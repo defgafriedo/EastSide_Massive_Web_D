@@ -1,17 +1,43 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Card, Row, Col, Container, Table, Nav, Navbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './adminList.css';
 import drawing1 from '../img/background3.png';
-import { FaEllipsisH, FaCheck, FaTimes, FaHome, FaCreditCard, FaUserCircle } from "react-icons/fa";
+import { FaEllipsisH, FaCheck, FaHome, FaCreditCard, FaUserCircle, FaPenFancy } from "react-icons/fa";
 
 
-const adminOverview = () => {
-
-
+const AdminOverview = () => {
     document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1)), url('${drawing1}')`;
     document.body.style.backgroundSize = 'cover';
 
+    const [userList, setUserList] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/v1/atsalluser');
+                setUserList(response.data.userList);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const [transactions, setTransactions] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/v1/atsShowAllOrder');
+                setTransactions(response.data.message);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
     return (
         <div>
             <Row className='p-5'>
@@ -54,84 +80,33 @@ const adminOverview = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>
-                                    <div style={{ backgroundColor: 'lightgreen', padding: '5px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'darkgreen' }}>
-                                        <FaCheck />
-                                        <span style={{ marginRight: '5px' }}>Confirm</span>
-                                    </div>
-                                </td>
-                                <td>JohnDoe</td>
-                                <td>johndoe@email.com</td>
-                                <td>2023-11-23</td>
-                                <td><Button variant="transparent" style={{ color: 'white' }}><FaEllipsisH /></Button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>
-                                    <div style={{ backgroundColor: 'lightcoral', padding: '5px 2px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'white' }}>
-                                        <FaTimes />
-                                        <span style={{ marginLeft: '5px' }}>Inactive</span>
-                                    </div>
-                                </td>
-                                <td>JaneSmith</td>
-                                <td>janesmith@email.com</td>
-                                <td>2023-11-22</td>
-                                <td><Button variant="transparent" style={{ color: 'white' }}><FaEllipsisH /></Button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>
-                                    <div style={{ backgroundColor: 'lightgreen', padding: '5px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'darkgreen' }}>
-                                        <FaCheck />
-                                        <span style={{ marginRight: '5px' }}>Confirm</span>
-                                    </div>
-                                </td>
-                                <td>BobJohnson</td>
-                                <td>=bobjohnson@email.com</td>
-                                <td>2023-11-21</td>
-                                <td><Button variant="transparent" style={{ color: 'white' }}><FaEllipsisH /></Button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>
-                                    <div style={{ backgroundColor: 'lightgreen', padding: '5px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'darkgreen' }}>
-                                        <FaCheck />
-                                        <span style={{ marginRight: '5px' }}>Confirm</span>
-                                    </div>
-                                </td>
-                                <td>JohnDoe</td>
-                                <td>johndoe@email.com</td>
-                                <td>2023-11-23</td>
-                                <td><Button variant="transparent" style={{ color: 'white' }}><FaEllipsisH /></Button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>
-                                    <div style={{ backgroundColor: 'lightgreen', padding: '5px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'darkgreen' }}>
-                                        <FaCheck />
-                                        <span style={{ marginRight: '5px' }}>Confirm</span>
-                                    </div>
-                                </td>
-                                <td>JaneSmith</td>
-                                <td>janesmith@email.com</td>
-                                <td>2023-11-22</td>
-                                <td><Button variant="transparent" style={{ color: 'white' }}><FaEllipsisH /></Button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>
-                                    <div style={{ backgroundColor: 'lightgreen', padding: '5px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'darkgreen' }}>
-                                        <FaCheck />
-                                        <span style={{ marginRight: '5px' }}>Confirm</span>
-                                    </div>
-                                </td>
-                                <td>BobJohnson</td>
-                                <td>=bobjohnson@email.com</td>
-                                <td>2023-11-21</td>
-                                <td><Button variant="transparent" style={{ color: 'white' }}><FaEllipsisH /></Button></td>
-                            </tr>
+                            {userList.slice(0, 5).map((user, index) => (
+                                <tr key={index}>
+                                    <td>
+                                        <input type="checkbox" />
+                                    </td>
+                                    <td>
+                                        <div
+                                            style={{
+                                                backgroundColor: user.level === "user" ? "lightgreen" : "lightcoral",
+                                                padding: "5px",
+                                                borderRadius: "5px",
+                                                display: "flex",
+                                                alignItems: "center",
+                                                color: user.level === "user" ? "darkgreen" : "white",
+                                            }}
+                                        >
+                                            {user.level === "user" ? <FaCheck /> : <FaPenFancy />}
+                                            <span style={{ marginRight: "5px" }}>{user.level}</span>
+                                        </div>
+                                    </td>
+                                    <td>{user.nama}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.nomor}</td>
+
+
+                                </tr>
+                            ))}
                         </tbody>
                     </Table>
 
@@ -165,90 +140,21 @@ const adminOverview = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>100.000</td>
-                                <td>
-                                    <div style={{ backgroundColor: 'lightgreen', padding: '5px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'darkgreen' }}>
-                                        <FaCheck />
-                                        <span style={{ marginRight: '5px' }}>Succeeded</span>
-                                    </div>
-                                </td>
-                                <td>Invoice 6B1E73DA-0017</td>
-                                <td>Nanahira@email.com</td>
-                                <td>2023-11-23 19:23</td>
-                                <td><Button variant="transparent" style={{ color: 'white' }}><FaEllipsisH /></Button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>100.000</td>
-                                <td>
-                                    <div style={{ backgroundColor: 'lightgreen', padding: '5px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'darkgreen' }}>
-                                        <FaCheck />
-                                        <span style={{ marginRight: '5px' }}>Succeeded</span>
-                                    </div>
-                                </td>
-                                <td>Invoice 6B1E73DA-0017</td>
-                                <td>Nanahira@email.com</td>
-                                <td>2023-11-23 19:23</td>
-                                <td><Button variant="transparent" style={{ color: 'white' }}><FaEllipsisH /></Button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>100.000</td>
-                                <td>
-                                    <div style={{ backgroundColor: 'lightgreen', padding: '5px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'darkgreen' }}>
-                                        <FaCheck />
-                                        <span style={{ marginRight: '5px' }}>Succeeded</span>
-                                    </div>
-                                </td>
-                                <td>Invoice 6B1E73DA-0017</td>
-                                <td>Nanahira@email.com</td>
-                                <td>2023-11-23 19:23</td>
-                                <td><Button variant="transparent" style={{ color: 'white' }}><FaEllipsisH /></Button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>100.000</td>
-                                <td>
-                                    <div style={{ backgroundColor: 'lightgreen', padding: '5px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'darkgreen' }}>
-                                        <FaCheck />
-                                        <span style={{ marginRight: '5px' }}>Succeeded</span>
-                                    </div>
-                                </td>
-                                <td>Invoice 6B1E73DA-0017</td>
-                                <td>Nanahira@email.com</td>
-                                <td>2023-11-23 19:23</td>
-                                <td><Button variant="transparent" style={{ color: 'white' }}><FaEllipsisH /></Button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>100.000</td>
-                                <td>
-                                    <div style={{ backgroundColor: 'lightgreen', padding: '5px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'darkgreen' }}>
-                                        <FaCheck />
-                                        <span style={{ marginRight: '5px' }}>Succeeded</span>
-                                    </div>
-                                </td>
-                                <td>Invoice 6B1E73DA-0017</td>
-                                <td>Nanahira@email.com</td>
-                                <td>2023-11-23 19:23</td>
-                                <td><Button variant="transparent" style={{ color: 'white' }}><FaEllipsisH /></Button></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" /></td>
-                                <td>100.000</td>
-                                <td>
-                                    <div style={{ backgroundColor: 'lightgreen', padding: '5px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'darkgreen' }}>
-                                        <FaCheck />
-                                        <span style={{ marginRight: '5px' }}>Succeeded</span>
-                                    </div>
-                                </td>
-                                <td>Invoice 6B1E73DA-0017</td>
-                                <td>Nanahira@email.com</td>
-                                <td>2023-11-23 19:23</td>
-                                <td><Button variant="transparent" style={{ color: 'white' }}><FaEllipsisH /></Button></td>
-                            </tr>
+                            {transactions.slice(0, 5).map(transaction => (
+                                <tr key={transaction.id}>
+                                    <td><input type="checkbox" /></td>
+                                    <td>Rp. {transaction.total}</td>
+                                    <td>
+                                        <div style={{ backgroundColor: 'lightgreen', padding: '5px', borderRadius: '5px', display: 'flex', alignItems: 'center', color: 'darkgreen' }}>
+                                            <FaCheck />
+                                            <span style={{ marginRight: '5px' }}>{transaction.status}</span>
+                                        </div>
+                                    </td>
+                                    <td>{transaction.invoice}</td>
+                                    <td>{transaction.nama_pembeli}</td>
+                                    <td className="px-4">{new Date(transaction.tanggal).toISOString().split('T')[0]}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </Table>
                 </Col>
@@ -257,4 +163,4 @@ const adminOverview = () => {
     );
 };
 
-export default adminOverview;
+export default AdminOverview;

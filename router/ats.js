@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const {getArtById, getShowOrder, getSaleProfile,addTransaction, updateUserLevel,deleteUser,getAllAvgArt,getShowcaseProfile,getAllUsers,getArtworkById,addUser, getLogUser, addArtwork,addSellArtwork, getAllArtwork,updateUserData,getUserById,staticPath, upload,uploadp, getListGallery, getListProfileSeniman} = require('../controller/controller')
+const {getArtById, getShowOrder, getSaleProfile,addTransaction, getShowAllOrder,updateUserLevel,deleteUser,getAllAvgArt,getShowcaseProfile,getAllUsers,getArtworkById,addUser, getLogUser, addArtwork,addSellArtwork, getAllArtwork,updateUserData,getUserById,staticPath, upload,uploadp, getListGallery, getListProfileSeniman} = require('../controller/controller')
 
 app.get ('/atslog', getLogUser)
 app.post ('/atssign', addUser)
@@ -15,6 +15,7 @@ app.get ('/atsgetuser', getUserById)
 app.patch ('/atsupdatelevel', updateUserLevel)
 app.delete('/atsdeleteuser/:userId', deleteUser)
 app.post ('/atstransaction', addTransaction)
+app.get('/atsShowAllOrder', getShowAllOrder);
 
 
 
