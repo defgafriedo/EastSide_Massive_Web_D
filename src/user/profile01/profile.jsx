@@ -2,9 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Col, Row, Image, Button } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import Background from "../../img/profile/background2.png";
-import Test from "../../img/profile/yato.jpg";
+
 import "../profileStyle.css";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Profile() {
@@ -13,6 +12,9 @@ function Profile() {
   const storedUserId = localStorage.getItem("userId");
   const [photo, setPhoto] = useState("");
   const [name, setName] = useState("");
+  const [desk, setDesk] = useState("");
+  const [tag, setTag] = useState([]);
+  const [galleryData, setGalleryData] = useState([]);
 
   useEffect(() => {
     const fetchUserById = async () => {
@@ -38,6 +40,9 @@ function Profile() {
           const fileURL = fullPath;
           setPhoto(fileURL);
           setName(response.data.user.nama);
+          setDesk(response.data.user.deskripsi);
+          setTag(response.data.user.tagline.split(','))
+          
           console.log("api", fullPath);
         } else {
           console.error("sad", response.data.message);
@@ -46,12 +51,40 @@ function Profile() {
         console.error("Error fetching user data:", error);
       }
     };
-    // const img = require('../../img/asset/profileAsset/image_1702273774438_829.png');
-    // setPhoto(img);
     fetchUserById();
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/atsgetartworkbyid?id_user=${storedUserId}`
+        );
+        const data = response.data;
+        setGalleryData(data.artList); // Change to artList instead of artDetails
+
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchData();
+
   }, []);
 
-  const [images] = useState([Test, Test, Test, Test, Test]);
+  const processPhoto = (photo) => {
+    if (!photo) {
+      return ""; // handle undefined or null case
+    }
+
+    const delimiter = "karyaAsset/";
+    const basePath = "http://localhost:5000/karya/";
+    const slicedPath = photo.substring(
+      photo.indexOf(delimiter) + delimiter.length
+    );
+    const fullPath = `${basePath}${slicedPath}`;
+    const fileURL = fullPath;
+    return fileURL;
+  };
+
+
   const [kategoriArtist] = useState([
     "Painter",
     "Abstract Art",
@@ -161,17 +194,18 @@ function Profile() {
         >
           <Col className="gallery-artist">
             <div className="image-galery">
-              {images.map((image, index) => (
+              {galleryData.map((item, index) => (
                 <div key={index} className="image-container">
                   <img
-                    style={{ maxWidth: "100%", height: "auto" }}
-                    src={image}
-                    alt={`Image ${index + 1}`}
+                    style={{ width: "200px", height: "300px" }}
+                    src={processPhoto(item.image)}
+                    alt={`Image`}
                     className="responsive-image mt-2"
                   />
+
                   <div className="overlay-image">
-                    <h6>Judul</h6>
-                    <p>By...</p>
+                    <h6>{item.judul}</h6>
+                    <p>By{item.artist}</p>
                   </div>
                 </div>
               ))}
@@ -190,12 +224,7 @@ function Profile() {
           }}
         >
           <h3>Description</h3>
-          <p>
-            A talented and dedicated painter, Ahmad Suyanto represents harmony
-            between creative imagination and deep technical skills. Born on
-            January 11 1988 in Surabaya, Ahmad has explored the world of art
-            from a young age, building a strong foundation for his creativity.
-          </p>
+          <p>{desk}</p>
           <Col
             style={{
               display: "flex",
@@ -216,13 +245,13 @@ function Profile() {
                 display: "flex",
               }}
             >
-              {kategoriArtist.map((kategori, index) => (
+              {tag.map((tag, index) => (
                 <Button
                   key={index}
                   className="cetegory-button"
-                  onClick={() => alert(kategori)}
+                  style={{ fontSize: '12px' }}
                 >
-                  {kategori}
+                  {tag}
                 </Button>
               ))}
             </div>

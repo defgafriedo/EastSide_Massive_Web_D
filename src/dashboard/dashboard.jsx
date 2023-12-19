@@ -3,9 +3,6 @@ import { Card, Row, Col, Container, Table, Button } from "react-bootstrap";
 import "./dashboard.css";
 import background from "../img/background1.png";
 import axios from "axios";
-import top1 from "../img/dashboard/top1.png";
-import top2 from "../img/dashboard/top2.png";
-import top3 from "../img/dashboard/top3.png";
 import testi1 from "../img/dashboard/testi1.png";
 import testi2 from "../img/dashboard/testi2.png";
 import testi3 from "../img/dashboard/testi3.png";
@@ -14,6 +11,8 @@ const Dashboard = () => {
   document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 1)), url('${background}')`;
   const containerRef = useRef(null);
   const [galleryData, setGalleryData] = useState([]);
+  const [galleryTop, setGalleryTop] = useState([]);
+  const [galleryTrending, setGalleryTrending] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,12 +21,26 @@ const Dashboard = () => {
         );
         const data = response.data;
         setGalleryData(data.artList);
+        const sortedGalleryTop = [...response.data.artList].sort((a, b) => b.harga - a.harga);
+        setGalleryTop(sortedGalleryTop)
+
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
-
     fetchData();
+    const fetchDataavg = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/v1/atsavgart"
+        );
+        const data = response.data;
+        setGalleryTrending(data.artList);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchDataavg();
   }, []);
 
   const processPhoto = (photo) => {
@@ -45,58 +58,19 @@ const Dashboard = () => {
     return fileURL;
   };
 
-  const tableData = [
-    {
-      artist: "Nanmaru Yamada",
-      price: 1000000,
-      sumOfArt: 200,
-    },
-    {
-      artist: "Nova Phoenixblade",
-      price: 2000000,
-      sumOfArt: 105,
-    },
-    {
-      artist: "Luna Stormshard",
-      price: 3500000,
-      sumOfArt: 170,
-    },
-    {
-      artist: "Seraphina Darkflame",
-      price: 1000000,
-      sumOfArt: 160,
-    },
-    {
-      artist: "Orion Frostbane",
-      price: 100000,
-      sumOfArt: 200,
-    },
-    {
-      artist: "Seraphina Darkflame",
-      price: 10000000,
-      sumOfArt: 305,
-    },
-    {
-      artist: "Zenith Thunderhawk",
-      price: 15000000,
-      sumOfArt: 400,
-    },
-    {
-      artist: "Cipher Nightshade",
-      price: 70000000,
-      sumOfArt: 100,
-    },
-    {
-      artist: "Astral Ironheart",
-      price: 1000000,
-      sumOfArt: 70,
-    },
-    {
-      artist: "Zephyr Steelwing",
-      price: 2000000,
-      sumOfArt: 10,
-    },
-  ];
+  const processPhotoprofile = (photo) => {
+    if (!photo) {
+      return "";
+    }
+    const delimiter = "profileAsset/";
+    const basePath = "http://localhost:5000/stat/";
+    const slicedPath = photo.substring(
+      photo.indexOf(delimiter) + delimiter.length
+    );
+    const fullPath = `${basePath}${slicedPath}`;
+    const fileURL = fullPath;
+    return fileURL;
+  };
 
   return (
     <div >
@@ -173,31 +147,55 @@ const Dashboard = () => {
           </Container>
 
           <Col md="auto" style={{ marginRight: "4rem" }} className="top-art-1">
-            <Card style={{ width: "16rem" }}>
-              <Card.Img variant="top" src={top1} style={{ height: "350px", objectFit: "cover" }}/>
-              <Card.Body>
-                <Card.Title>Fall Apart by Jidan</Card.Title>
-                <Card.Text>Price: Rp 25.000.000,00</Card.Text>
-              </Card.Body>
-            </Card>
+            {galleryTop.length > 0 && (
+              <Card className="mb-5 mt-5" style={{ width: "16rem" }}>
+                <Card.Img
+                  variant="top"
+                  src={processPhoto(galleryTop[0].image)}
+                  style={{ height: "300px", width: "auto", objectFit: "cover" }}
+                />
+
+                <Card.Body>
+                  <Card.Title>{galleryTop[0].judul} by {galleryTop[0].artist}</Card.Title>
+                  <Card.Text>{`Price: Rp ${galleryTop[0].harga},00`}</Card.Text>
+                </Card.Body>
+              </Card>
+            )}
           </Col>
+
           <Col md="auto" className="top-art-2">
-            <Card className="mb-5 mt-5" style={{ width: "16rem" }}>
-              <Card.Img variant="top" src={top2} style={{ height: "350px", objectFit: "cover" }}/>
-              <Card.Body>
-                <Card.Title>Lies by Jidan</Card.Title>
-                <Card.Text>Price: Rp 25.000.000,00</Card.Text>
-              </Card.Body>
-            </Card>
+            {galleryTop.length > 0 && (
+              <Card className="mb-5 mt-5" style={{ width: "16rem" }}>
+                <Card.Img
+                  variant="top"
+                  src={processPhoto(galleryTop[1].image)}
+                  style={{ height: "300px", width: "auto", objectFit: "cover" }}
+                />
+
+                <Card.Body>
+                  <Card.Title>{galleryTop[1].judul} by {galleryTop[1].artist}</Card.Title>
+                  <Card.Text>{`Price: Rp ${galleryTop[1].harga.toString()},00`}</Card.Text>
+
+                </Card.Body>
+              </Card>
+            )}
           </Col>
+
           <Col md="auto" style={{ marginLeft: "4rem" }} className="top-art-3">
-            <Card style={{ width: "16rem" }}>
-              <Card.Img variant="top" src={top3} style={{ height: "350px", objectFit: "cover" }}/>
-              <Card.Body>
-                <Card.Title>Blood Tsuki by Jidan</Card.Title>
-                <Card.Text>Price: Rp 25.000.000,00</Card.Text>
-              </Card.Body>
-            </Card>
+            {galleryTop.length > 0 && (
+              <Card className="mb-5 mt-5" style={{ width: "16rem" }}>
+                <Card.Img
+                  variant="top"
+                  src={processPhoto(galleryTop[2].image)}
+                  style={{ height: "300px", width: "auto", objectFit: "cover" }}
+                />
+
+                <Card.Body>
+                  <Card.Title>{galleryTop[2].judul} by {galleryTop[2].artist}</Card.Title>
+                  <Card.Text>{`Price: Rp ${galleryTop[2].harga},00`}</Card.Text>
+                </Card.Body>
+              </Card>
+            )}
           </Col>
         </Row>
         <Row className="black-background " style={{ marginBottom: "4rem" }}>
@@ -224,13 +222,13 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {tableData.slice(0, 5).map((item, index) => (
+                {galleryTrending.slice(0, 5).map((item, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{item.artist}</td>
-                    <td>{item.price}</td>
+                    <td>{item.user_name}</td>
+                    <td>{item.average_harga}</td>
                     <td style={{ display: "flex", justifyContent: "center" }}>
-                      {item.sumOfArt}
+                      {item.data_count}
                     </td>
                   </tr>
                 ))}
@@ -252,13 +250,13 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {tableData.slice(5, 10).map((item, index) => (
+                {galleryTrending.slice(5, 10).map((item, index) => (
                   <tr key={index}>
                     <td>{index + 6}</td>
-                    <td>{item.artist}</td>
-                    <td>{item.price}</td>
+                    <td>{item.user_name}</td>
+                    <td>{item.average_harga}</td>
                     <td style={{ display: "flex", justifyContent: "center" }}>
-                      {item.sumOfArt}
+                      {item.data_count}
                     </td>
                   </tr>
                 ))}
@@ -276,82 +274,57 @@ const Dashboard = () => {
         >
           <h4 style={{ marginTop: "1%" }}>Testimonial from success artists</h4>
 
-          <Row
-            className="justify-content-center"
-            style={{ display: "flex", alignItems: "center" }}
-          >
-            <Col md="auto" className="py-5 body-testinominal">
-              <Card
-                className="align-items-center py-5 px-3"
-                style={{ width: "16rem", background: "#D9D9D9" }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={testi1}
-                  style={{ width: "75px", height: "57px", objectFit: "cover" }}
-                />
-                <Card.Body>
-                  <Card.Title style={{ color: "black", fontSize: "16px" }}>
-                    Ananta Kun
-                  </Card.Title>
-                  <Card.Text style={{ color: "black", fontSize: "12px" }}>
-                    <strong>Artist Top 2</strong>
-                  </Card.Text>
-                  <Card.Text style={{ color: "black", fontSize: "12px" }}>
-                    “There’s twin line beetwen life and death. U will find
-                    justice over there.”
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md="auto" className="body-testinominal">
-              <Card
-                className="align-items-center py-5 px-3"
-                style={{ width: "16rem", background: "#D9D9D9" }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={testi2}
-                  style={{ width: "75px", height: "57px", objectFit: "cover" }}
-                />
-                <Card.Body>
-                  <Card.Title style={{ color: "black", fontSize: "16px" }}>
-                    Zidan Bjir
-                  </Card.Title>
-                  <Card.Text style={{ color: "black", fontSize: "12px" }}>
-                    <strong>Artist Top 1</strong>
-                  </Card.Text>
-                  <Card.Text style={{ color: "black", fontSize: "12px" }}>
-                    “There’s twin line beetwen life and death. U will find
-                    justice over there.”
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md="auto" className="py-5 body-testinominal">
-              <Card
-                className="align-items-center py-5 px-3"
-                style={{ width: "16rem", background: "#D9D9D9" }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={testi3}
-                  style={{ width: "75px", height: "57px", objectFit: "cover" }}
-                />
-                <Card.Body>
-                  <Card.Title style={{ color: "black", fontSize: "16px" }}>
-                    Reno Kun
-                  </Card.Title>
-                  <Card.Text style={{ color: "black", fontSize: "12px" }}>
-                    <strong>Artist Top 3</strong>
-                  </Card.Text>
-                  <Card.Text style={{ color: "black", fontSize: "12px" }}>
-                    “There’s twin line beetwen life and death. U will find
-                    justice over there.”
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
+          <Row className="justify-content-center" style={{ display: "flex", alignItems: "center" }}>
+            {galleryData.length > 0 && (
+              <Col md="auto" className="py-5 body-testinominal">
+                <Card className="align-items-center py-5 px-3" style={{ width: "16rem", background: "#D9D9D9" }}>
+                  <Card.Img variant="top" src={processPhotoprofile(galleryData[2].artistimg)} style={{ width: "75px", height: "57px", objectFit: "cover" }} />
+                  <Card.Body>
+                    <Card.Title style={{ color: "black", fontSize: "16px" }}>{galleryData[2].artist}</Card.Title>
+                    <Card.Text style={{ color: "black", fontSize: "12px" }}><strong>Artist Top 2</strong></Card.Text>
+                    <Card.Text style={{ color: "black", fontSize: "12px", }}>
+                      "{galleryData[2].artistdesk && galleryData[2].artistdesk.split('.').shift() + '.'}"
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            )}
+            {galleryData.length > 0 && (
+              <Col md="auto" className="body-testinominal">
+                <Card
+                  className="align-items-center py-5 px-3"
+                  style={{ width: "16rem", background: "#D9D9D9" }}
+                >
+                  <Card.Img variant="top" src={processPhotoprofile(galleryData[0].artistimg)} style={{ width: "75px", height: "57px", objectFit: "cover" }} />
+                  <Card.Body>
+                    <Card.Title style={{ color: "black", fontSize: "16px" }}>{galleryData[0].artist}</Card.Title>
+                    <Card.Text style={{ color: "black", fontSize: "12px" }}><strong>Artist Top 1</strong></Card.Text>
+                    <Card.Text style={{ color: "black", fontSize: "12px", }}>
+                      "{galleryData[0].artistdesk && galleryData[0].artistdesk.split('.').shift() + '.'}"
+                    </Card.Text>
+
+                  </Card.Body>
+                </Card>
+              </Col>
+            )}
+            {galleryData.length > 0 && (
+              <Col md="auto" className="py-5 body-testinominal">
+                <Card
+                  className="align-items-center py-5 px-3"
+                  style={{ width: "16rem", background: "#D9D9D9" }}
+                >
+                 <Card.Img variant="top" src={processPhotoprofile(galleryData[4].artistimg)} style={{ width: "75px", height: "57px", objectFit: "cover" }} />
+                  <Card.Body>
+                    <Card.Title style={{ color: "black", fontSize: "16px" }}>{galleryData[4].artist}</Card.Title>
+                    <Card.Text style={{ color: "black", fontSize: "12px" }}><strong>Artist Top 3</strong></Card.Text>
+                    <Card.Text style={{ color: "black", fontSize: "12px", }}>
+                      "{galleryData[4].artistdesk && galleryData[4].artistdesk.split('.').shift() + '.'}"
+                    </Card.Text>
+
+                  </Card.Body>
+                </Card>
+              </Col>
+            )}
           </Row>
         </div>
       </Container>

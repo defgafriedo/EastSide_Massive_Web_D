@@ -17,7 +17,10 @@ function ListProfileSeniman() {
           "http://localhost:5000/api/v1/atsListProfileSeniman"
         );
         const data = response.data;
-        setGallerySeniman(data.data);
+        const uniqueUsers = Array.from(new Set(data.data.map(item => item.id_user)));
+        const uniqueGallery = uniqueUsers.map(userId => data.data.find(item => item.id_user === userId));
+
+        setGallerySeniman(uniqueGallery);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -60,7 +63,7 @@ function ListProfileSeniman() {
         <Row>
           {GallerySeniman.map((galleryItem, index) => (
             <Col className="mx-4 my-4" key={index}>
-               <Link to={`/profilegaleryuser?id_art=${GallerySeniman.id}`}>
+               <Link to={`/profilegaleryuser?id_user=${galleryItem.id_user}`}>
                 <Card className="card">
                   <Card style={{ position: "relative" }}>
                     <Card.Img

@@ -27,8 +27,14 @@ function SignInForm(props) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/v1/atslog', { email, password, });
-
+      const response = await axios.get('http://localhost:5000/api/v1/atslog', {
+        params: {
+            email: email,
+            pw: password
+        }
+    });
+    
+  
       if (response.data.success) {
         localStorage.setItem('userId', response.data.userId);
         localStorage.setItem('userName', response.data.userName);
@@ -40,7 +46,7 @@ function SignInForm(props) {
       console.error('Login error: ', error);
     }
   };
-
+  
 
   return (
     <div className="form-container sign-in-container">

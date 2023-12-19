@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Row, Col, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./listProfileGalleryStyle.css";
 import Background3 from "../img/background3.png";
 import axios from 'axios';
@@ -40,28 +41,30 @@ function ListProfileGallery() {
     <>
       <Container className="my-5 d-flex justify-content-center align-items-center">
         <Row>
-          {galleryData.map((art, index) => (
+        {galleryData.map((art, index) => (
             <Col className="mx-4 my-4" key={index}>
-              <Card className="card">
-              <Card.Img
-                      variant="top"
-                      src={processPhoto(art.image)}
-                      style={{ height: "350px", objectFit: "cover" }}
-                    />  
-                <Card.Body>
-                  <Card.Title>{art.nama}</Card.Title>
-                  <Card.Text
-                  style={{
-                    maxHeight: '6rem',
-                    maxHeigh: '100%',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                  }}
-                >
-                  {art.deskripsi}
-                </Card.Text>
-                </Card.Body>
-              </Card>
+              <Link to={`/detailshowcase?id_art=${art.id_art}`}>
+                <Card className="card">
+                  <Card.Img
+                    variant="top"
+                    src={processPhoto(art.image)}
+                    style={{ height: "350px", objectFit: "cover" }}
+                  />  
+                  <Card.Body>
+                    <Card.Title>{art.nama}</Card.Title>
+                    <Card.Text
+                      style={{
+                        maxHeight: '6rem',
+                        maxHeigh: '100%',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    >
+                      {art.deskripsi}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Link>
             </Col>
           ))}
         </Row>

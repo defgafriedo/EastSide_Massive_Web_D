@@ -1,7 +1,6 @@
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Background3 from "../img/background3.png";
-import Drawing from "../img/orderlist/Drawing3.png";
 import Vector from "../img/orderlist/Vector.png";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
@@ -29,6 +28,7 @@ const OrderDetail = () => {
 
     navigate('/payment', {
       state: {
+        idart: id_art,
         artworkPrice: artworkPrice,
         shippingFee: shippingFee,
         shippingAddress: shippingAddress,
@@ -238,7 +238,7 @@ const OrderDetail = () => {
                   }}
                   onClick={handleCheckout}
                 >
-                  Chechk Out
+                  Continue
                 </Button>
               </Col>
             </Col>

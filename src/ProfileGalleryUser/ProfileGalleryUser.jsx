@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
@@ -13,19 +14,22 @@ const ProfileGalleryUser = () => {
   document.body.style.backgroundImage = `url('${BackgroundProfileGallery}')`;
   document.body.style.backgroundColor = "black";
   document.body.style.backgroundRepeat = "no-repeat";
-  const id_user = localStorage.getItem("userId");
   const [itemShowcase, setItemShowcase] = useState([]);
   const [itemForSale, setItemForSale] = useState([]);
   const [galleryArtist, setGalleryArtist] = useState([])
   const [photo, setPhoto] = useState("");
-  const { id_art } = useParams();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const id_user = searchParams.get('id_user');
+  const userId = parseInt(id_user, 10);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/v1/atsgetuser?id_user=${id_user}&id_art=${id_art}`)
-        const dataUser = response.data;
-        setGalleryArtist(dataUser.user);
+        const userId = parseInt(id_user, 10);
+        const response = await axios.get(`http://localhost:5000/api/v1/atsgetuser?id_user=${userId}`);
+
 
         if (itemShowcase) {
           const response = await axios.get(
@@ -43,6 +47,9 @@ const ProfileGalleryUser = () => {
         }
 
         if (response.data.user) {
+          const dataUser = response.data;
+          setGalleryArtist(dataUser.user);
+
           const delimiter = "profileAsset/";
           const basePath = "http://localhost:5000/stat/";
           const slicedPath = response.data.user.image.substring(
@@ -64,8 +71,6 @@ const ProfileGalleryUser = () => {
 
 
 
-
-
   return (
     <>
       <div
@@ -82,13 +87,14 @@ const ProfileGalleryUser = () => {
           style={{ marginTop: "50px" }}
         >
 
-          <div className="mx-5">
-              <img
-                src={photo}
-                alt="Photo Profile Artist"
-                style={{ height:'6rem', width: "12rem" }}
-              />
+          <div className="mx-5" style={{ width: "12rem", height: "6rem", overflow: "hidden" }}>
+            <img
+              src={photo}
+              alt="Photo Profile Artist"
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
+            />
           </div>
+
           <div className="mx-5 my-3">
             <Row className="d-flex align-items-center">
               <Col xs="auto">
@@ -121,22 +127,6 @@ const ProfileGalleryUser = () => {
         }}
       >
         <Container className="py-5 my-4">
-          <div className="d-flex justify-content-end my-4 mx-3">
-            <Link to="/inputpostingkarya">
-              <button
-                variant="secondary"
-                className="d-flex align-items-center justify-content-center"
-                style={{
-                  fontSize: "20px",
-                  borderRadius: "50%",
-                  width: "40px",
-                  height: "40px",
-                }}
-              >
-                <FaPlus />
-              </button>
-            </Link>
-          </div>
           <Showcase itemShowcase={itemShowcase} />
         </Container >
       </div >

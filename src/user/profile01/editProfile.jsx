@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Col, Row, Image, Button, Form } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Background from "../../img/profile/background2.png";
 import Photo from "../../img/profile/contoh.png";
 import "../profileStyle.css";
@@ -11,10 +11,43 @@ function Editprofile() {
   document.body.style.backgroundImage = ` url('${Background}')`;
   document.body.style.backgroundSize = "cover";
   const navigate = useNavigate();
-
   const storedUserId = localStorage.getItem("userId");
   const [file, setFile] = useState(null);
   const [fileURL, setFileURL] = useState(null);
+  const [name, setName] = useState("");
+  const [desk, setDesk] = useState("");
+  const [tag, setTag] = useState([]);
+
+
+  useEffect(() => {
+    const fetchUserById = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/v1/atsgetuser",
+          {
+            params: {
+              id_user: storedUserId,
+            },
+          }
+        );
+
+        if (response.data.success && response.data.user) {
+          setName(response.data.user.nama);
+          setDesk(response.data.user.deskripsi);
+          setTag(response.data.user.tagline.split(','))
+          
+        } else {
+          console.error("sad", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchUserById();
+  }, []);
+
+
+
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -29,14 +62,6 @@ function Editprofile() {
     }));
   };
 
-  const [kategoriArtist] = useState([
-    "Statue",
-    "Ceramics",
-    "Clay",
-    "Sculpture",
-    "Teknik Resin",
-    "Resin Engineering",
-  ]);
 
   const [formData, setFormData] = useState({
     nama: "",
@@ -141,7 +166,7 @@ function Editprofile() {
               )}
 
               <h5 className="mt-2" style={{ color: "white" }}>
-                Nickname
+              {name}
               </h5>
             </Col>
           </Col>
@@ -358,12 +383,7 @@ function Editprofile() {
           }}
         >
           <h3>Description</h3>
-          <p>
-            A talented and dedicated painter, Ahmad Suyanto represents harmony
-            between creative imagination and deep technical skills. Born on
-            January 11 1988 in Surabaya, Ahmad has explored the world of art
-            from a young age, building a strong foundation for his creativity.
-          </p>
+          <p>{desk}</p>
 
           <Col
             style={{
@@ -384,16 +404,15 @@ function Editprofile() {
                 display: "flex",
               }}
             >
-              {kategoriArtist.map((kategori, index) => (
+              {tag.map((tag, index) => (
                 <Button
                   key={index}
                   className="cetegory-button"
-                  onClick={() => alert(kategori)}
+                  style={{ fontSize: '12px' }}
                 >
-                  {kategori}
+                  {tag}
                 </Button>
               ))}
-              <Button className="cetegory-button">&nbsp; + &nbsp;</Button>
             </div>
           </Col>
         </Col>
