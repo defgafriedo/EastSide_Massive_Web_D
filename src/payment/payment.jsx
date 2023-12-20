@@ -108,7 +108,7 @@ const Payment = () => {
                 id="Shopee-pay"
                 name="paymentMethod"
                 value="Shopee-pay"
-                checked={paymethod === "Shopee"}
+                checked={paymethod === "Shopee-pay"}
                 onChange={handlePaymentChange}
               />
               <label htmlFor="Shopee-pay">
@@ -127,7 +127,7 @@ const Payment = () => {
                 id="BRI"
                 name="paymentMethod"
                 value="BRI"
-                checked={paymethod === "Bri"}
+                checked={paymethod === "BRI"}
                 onChange={handlePaymentChange} />
               <label htmlFor="BRI">
                 <img className="BRI mx-3" src={BRI} alt="BRI" />
@@ -138,7 +138,7 @@ const Payment = () => {
                 id="BCA"
                 name="paymentMethod"
                 value="BCA"
-                checked={paymethod === "Bca"}
+                checked={paymethod === "BCA"}
                 onChange={handlePaymentChange} />
               <label htmlFor="BCA">
                 <img className="BCA mx-3" src={BCA} alt="BCA" />
